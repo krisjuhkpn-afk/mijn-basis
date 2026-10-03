@@ -62,6 +62,23 @@
    font-size: 16px;
    font-weight: 600;
 }
+
+.voortgang-balk {
+   width: 300px;
+   height: 10px;
+   background: #f3dfe5;
+   border-radius: 10px;
+   margin: 0 auto 25px auto;
+   overflow: hidden;
+}
+ 
+#voortgang-vulling {
+   width: 0%;
+   height: 100%;
+   background: #c86b87;
+   border-radius: 10px;
+   transition: width 0.3s ease;
+}
  
 </style>
 </head>
@@ -72,6 +89,10 @@
  
  <p id="datum"></p>
 <p id="voortgang"></p>
+
+ <div class="voortgang-balk">
+   <div id="voortgang-vulling"></div>
+</div>
  
  <div class="dashboard">
  <a href="#"><img src="01 lichtbril.png" alt="Lichtbril"></a>
@@ -115,6 +136,8 @@ const iconen = document.querySelectorAll('.dashboard a');
  const aantalKlaar = document.querySelectorAll('.dashboard a.done').length;
  document.getElementById('voortgang').textContent =
    aantalKlaar + ' van ' + iconen.length + ' gedaan';
+  const percentage = (aantalKlaar / iconen.length) * 100;
+document.getElementById('voortgang-vulling').style.width = percentage + '%';
 }
  updateVoortgang();
  
