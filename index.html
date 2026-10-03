@@ -76,10 +76,36 @@
 </div>
 
 <script>
-document.querySelectorAll('.dashboard a').forEach(function(icon) {
+const vandaag = new Date().toLocaleDateString('en-CA');
+const opgeslagenDag = localStorage.getItem('dashboardDatum');
+ 
+if (opgeslagenDag !== vandaag) {
+   localStorage.removeItem('dashboardKlaar');
+   localStorage.setItem('dashboardDatum', vandaag);
+}
+ 
+let klaar = JSON.parse(localStorage.getItem('dashboardKlaar') || '[]');
+const iconen = document.querySelectorAll('.dashboard a');
+ 
+iconen.forEach(function(icon, nummer) {
+ 
+   if (klaar.includes(nummer)) {
+       icon.classList.add('done');
+   }
+ 
    icon.addEventListener('click', function(event) {
        event.preventDefault();
        icon.classList.toggle('done');
+ 
+       klaar = [];
+ 
+       iconen.forEach(function(item, index) {
+           if (item.classList.contains('done')) {
+               klaar.push(index);
+           }
+       });
+ 
+       localStorage.setItem('dashboardKlaar', JSON.stringify(klaar));
    });
 });
 </script>
