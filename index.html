@@ -39,6 +39,15 @@
    display: block;
    text-decoration: none;
  }
+
+ .dashboard a.done img {
+    opacity: 0.30;
+}
+
+.dashboard a {
+    cursor: pointer;
+}
+ 
 </style>
 </head>
  
@@ -65,6 +74,15 @@
  <a href="#"><img src="14 ontspannen.png" alt="Ontspannen"></a>
  <a href="#"><img src="15 medicatie supplementen.png" alt="Medicatie en supplementen"></a>
 </div>
+
+<script>
+document.querySelectorAll('.dashboard a').forEach(function(icon) {
+   icon.addEventListener('click', function(event) {
+       event.preventDefault();
+       icon.classList.toggle('done');
+   });
+});
+</script>
  
 </body>
 </html>
