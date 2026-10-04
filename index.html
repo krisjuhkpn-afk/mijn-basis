@@ -144,7 +144,6 @@ const iconen = document.querySelectorAll('.dashboard a');
   const percentage = (aantalKlaar / iconen.length) * 100;
 document.getElementById('voortgang-vulling').style.width = percentage + '%';
 }
- updateVoortgang();
  
 iconen.forEach(function(icon, nummer) {
  
@@ -168,6 +167,8 @@ iconen.forEach(function(icon, nummer) {
        localStorage.setItem('dashboardKlaar', JSON.stringify(klaar));
    });
 });
+
+updateVoortgang();
 </script>
  
 </body>
