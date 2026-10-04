@@ -85,6 +85,44 @@
        margin-bottom: 18px;
    }
 }
+
+ .afspraken {
+ max-width: 650px;
+ margin: 32px auto 0;
+}
+ 
+.afspraken h2 {
+ color: #7a1735;
+ font-size: 22px;
+ margin: 0 0 14px;
+}
+ 
+.afspraak {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ background: #fdf2f6;
+ border: 1px solid #f3c9d8;
+ border-radius: 14px;
+ padding: 10px 14px;
+ margin-bottom: 10px;
+}
+ 
+.tijd {
+ background: #f7d6e2;
+ color: #7a1735;
+ font-weight: 700;
+ border-radius: 9px;
+ padding: 6px 9px;
+ min-width: 48px;
+ text-align: center;
+}
+ 
+.omschrijving {
+ font-size: 16px;
+ font-weight: 600;
+}
+ 
 </style>
 </head>
  
@@ -119,6 +157,20 @@
  <a href="#"><img src="15 medicatie supplementen.png" alt="Medicatie en supplementen"></a>
 </div>
 
+ <section class="afspraken">
+ <h2>Afspraken van de dag</h2>
+ 
+ <div class="afspraak">
+   <span class="tijd">13:15</span>
+   <span class="omschrijving">Test afspraak</span>
+ </div>
+ 
+ <div class="afspraak">
+   <span class="tijd">16:00</span>
+   <span class="omschrijving">Test afspraak 2</span>
+ </div>
+</section>
+ 
 <script>
 const vandaag = new Date().toLocaleDateString('en-CA');
 const opgeslagenDag = localStorage.getItem('dashboardDatum');
