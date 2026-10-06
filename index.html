@@ -157,18 +157,10 @@
  <a href="#"><img src="15 medicatie supplementen.png" alt="Medicatie en supplementen"></a>
 </div>
 
- <section class="afspraken">
- <h2>Afspraken van de dag</h2>
+<section class="afspraken">
+   <h2>Afspraken van de dag</h2>
  
- <div class="afspraak">
-   <span class="tijd">13:15</span>
-   <span class="omschrijving">Test afspraak</span>
- </div>
- 
- <div class="afspraak">
-   <span class="tijd">16:00</span>
-   <span class="omschrijving">Test afspraak 2</span>
- </div>
+   <div id="agenda-afspraken"></div>
 </section>
  
 <script>
@@ -221,6 +213,34 @@ iconen.forEach(function(icon, nummer) {
 });
 
 updateVoortgang();
+
+ async function laadAgenda() {
+ const vak = document.getElementById('agenda-afspraken');
+ 
+ try {
+   const response = await fetch('https://krisjuh-agenda.krisjuh.workers.dev/');
+   const afspraken = await response.json();
+ 
+   vak.innerHTML = '';
+ 
+   afspraken.forEach(afspraak => {
+     const regel = document.createElement('div');
+     regel.className = 'afspraak';
+ 
+     regel.innerHTML = `
+       <span class="tijd">${afspraak.tijd}</span>
+       <span class="omschrijving">${afspraak.titel}</span>
+     `;
+ 
+     vak.appendChild(regel);
+   });
+ 
+ } catch (error) {
+   console.error('Agenda kon niet worden geladen:', error);
+ }
+}
+ 
+laadAgenda();
 </script>
  
 </body>
