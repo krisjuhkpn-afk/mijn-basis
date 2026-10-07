@@ -228,6 +228,13 @@ updateVoortgang();
  try {
    const response = await fetch('https://krisjuh-agenda.krisjuh.workers.dev/');
    const afspraken = await response.json();
+   const afsprakenTeller = document.getElementById('afspraken-teller');
+ 
+if (afspraken.length === 1) {
+   afsprakenTeller.textContent = '1 afspraak vandaag';
+} else {
+   afsprakenTeller.textContent = afspraken.length + ' afspraken vandaag';
+}
  
    vak.innerHTML = '';
  
