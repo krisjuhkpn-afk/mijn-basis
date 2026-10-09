@@ -170,6 +170,11 @@
  
    <div id="agenda-afspraken"></div>
 </section>
+
+ <section class="afspraken" id="openstaande-actiepunten">
+ <h2>Openstaande actiepunten</h2>
+ <div id="google-taken">Taken worden geladen...</div>
+</section>
  
 <script>
 const vandaag = new Date().toLocaleDateString('en-CA');
@@ -256,6 +261,52 @@ if (afspraken.length === 1) {
 }
  
 laadAgenda();
+
+ async function laadActiepunten() {
+ const vak = document.getElementById("google-taken");
+ 
+ try {
+   const response = await fetch(
+     "https://krisjuh-agenda.krisjuh.workers.dev/tasks"
+   );
+ 
+   if (!response.ok) {
+     throw new Error("Actiepunten ophalen mislukt");
+   }
+ 
+   const alleTaken = await response.json();
+ 
+   const taken = alleTaken.filter(
+     taak => taak.lijst === "Openstaande Actiepunten"
+   );
+ 
+   vak.innerHTML = "";
+ 
+   if (taken.length === 0) {
+     vak.textContent = "Geen openstaande actiepunten";
+     return;
+   }
+ 
+   taken.forEach(taak => {
+     const regel = document.createElement("div");
+     regel.className = "afspraak";
+ 
+     const titel = document.createElement("span");
+     titel.className = "omschrijving";
+     titel.textContent = taak.titel;
+ 
+     regel.appendChild(titel);
+     vak.appendChild(regel);
+   });
+ 
+ } catch (error) {
+   vak.textContent = "Actiepunten konden niet worden geladen";
+   console.error(error);
+ }
+}
+ 
+laadActiepunten();
+
 </script>
  
 </body>
