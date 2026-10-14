@@ -24,11 +24,11 @@
  
  .dashboard {
    display: grid;
-   grid-template-columns: repeat(5, 1fr);
-   gap: 12px;
+   grid-template-columns: repeat(4, minmax(0, 1fr));
+   gap: 8px;
    max-width: 760px;
    margin: 0 auto;
- }
+}
  
  .dashboard img {
    display: block;
@@ -126,6 +126,17 @@
  font-size: 14px;
  font-weight: 400;
 }
+
+ @media (max-width: 600px) {
+   body {
+      padding-left: 10px;
+      padding-right: 10px;
+   }
+
+   .dashboard {
+      gap: 7px;
+   }
+}
  
 </style>
 </head>
@@ -145,25 +156,29 @@
    <div id="voortgang-vulling"></div>
 </div>
  
- <div class="dashboard">
- <a href="#"><img src="01 lichtbril.png" alt="Lichtbril"></a>
- <a href="#"><img src="02 supplementen.png" alt="Supplementen"></a>
- <a href="#"><img src="03 badderen.png" alt="Badderen"></a>
- <a href="#"><img src="04 aankleden.png" alt="Aankleden"></a>
- <a href="#"><img src="05 tanden poetsen.png" alt="Tanden poetsen"></a>
  
- <a href="#"><img src="06 wandelen.png" alt="Wandelen"></a>
- <a href="#"><img src="07 ontbijt.png" alt="Ontbijt"></a>
- <a href="#"><img src="08 medicatie supplementen.png" alt="Medicatie en supplementen"></a>
- <a href="#"><img src="09 sporten.png" alt="Sporten"></a>
- <a href="#"><img src="10 lunch.png" alt="Lunch"></a>
- 
- <a href="#"><img src="11 diner.png" alt="Diner"></a>
- <a href="#"><img src="12 medicatie supplementen.png" alt="Medicatie en supplementen"></a>
- <a href="#"><img src="13 opruimen.png" alt="Opruimen"></a>
- <a href="#"><img src="14 ontspannen.png" alt="Ontspannen"></a>
- <a href="#"><img src="15 medicatie supplementen.png" alt="Medicatie en supplementen"></a>
+<div class="dashboard">
+  <a href="#"><img src="01 lichtbril.png" alt="Lichtbril"></a>
+  <a href="#"><img src="02 medicamentels.png" alt="Medicamentels"></a>
+  <a href="#"><img src="03 badderen.png" alt="Badderen"></a>
+  <a href="#"><img src="04 aankleden.png" alt="Aankleden"></a>
+
+  <a href="#"><img src="05 tandenpoetsen.png" alt="Tandenpoetsen"></a>
+  <a href="#"><img src="06 wandelen.png" alt="Wandelen"></a>
+  <a href="#"><img src="07 ontbijt.png" alt="Ontbijt"></a>
+  <a href="#"><img src="08 medicamentels.png" alt="Medicamentels"></a>
+
+  <a href="#"><img src="09 huisrommelen.png" alt="Huisrommelen"></a>
+  <a href="#"><img src="10 lunch.png" alt="Lunch"></a>
+  <a href="#"><img src="11 sporten.png" alt="Sporten"></a>
+  <a href="#"><img src="12 diner.png" alt="Diner"></a>
+
+  <a href="#"><img src="13 medicamentels.png" alt="Medicamentels"></a>
+  <a href="#"><img src="14 ontspannen.png" alt="Ontspannen"></a>
+  <a href="#"><img src="15 opruimen.png" alt="Opruimen"></a>
+  <a href="#"><img src="16 medicamentels.png" alt="Medicamentels"></a>
 </div>
+
 
 <section class="afspraken">
    <h2>Afspraken van de dag</h2>
