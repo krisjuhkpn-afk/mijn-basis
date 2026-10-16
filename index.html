@@ -322,6 +322,25 @@ laadAgenda();
  
 laadActiepunten();
 
+ 
+async function testBeveiligdeVerbinding() {
+  try {
+    const response = await fetch(
+      "https://krisjuh-taken.krisjuh.workers.dev/",
+      {
+        method: "GET",
+        credentials: "include"
+      }
+    );
+
+    console.log("Cloudflare test:", response.status);
+  } catch (error) {
+    console.error("Cloudflare verbinding mislukt:", error);
+  }
+}
+
+testBeveiligdeVerbinding();
+
 </script>
  
 </body>
