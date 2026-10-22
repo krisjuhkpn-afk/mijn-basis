@@ -126,7 +126,25 @@
  font-size: 14px;
  font-weight: 400;
 }
+.afspraak.voltooid {
+  background: #f2f2f2;
+  border-color: #dddddd;
+  opacity: 0.6;
+}
 
+.afspraak.voltooid .omschrijving {
+  color: #777777;
+  text-decoration: line-through;
+}
+
+ .actiepunt-vinkje {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #a83b60;
+  cursor: pointer;
+  flex-shrink: 0;
+}
  @media (max-width: 600px) {
    body {
       padding-left: 10px;
@@ -305,7 +323,16 @@ laadAgenda();
    taken.forEach(taak => {
      const regel = document.createElement("div");
      regel.className = "afspraak";
- 
+    
+const vinkje = document.createElement("input");
+vinkje.type = "checkbox";
+vinkje.className = "actiepunt-vinkje";
+vinkje.setAttribute("aria-label", "Voltooi " + taak.titel);
+
+regel.appendChild(vinkje); 
+    vinkje.addEventListener("change", () => {
+  regel.classList.toggle("voltooid", vinkje.checked);
+});
      const titel = document.createElement("span");
      titel.className = "omschrijving";
      titel.textContent = taak.titel;
