@@ -330,9 +330,17 @@ vinkje.className = "actiepunt-vinkje";
 vinkje.setAttribute("aria-label", "Voltooi " + taak.titel);
 
 regel.appendChild(vinkje); 
-    vinkje.addEventListener("change", () => {
+    const vandaag = new Date().toLocaleDateString("sv-SE");
+const opslagSleutel = "actiepunt-" + vandaag + "-" + taak.id;
+
+vinkje.checked = localStorage.getItem(opslagSleutel) === "true";
+regel.classList.toggle("voltooid", vinkje.checked);
+
+vinkje.addEventListener("change", () => {
   regel.classList.toggle("voltooid", vinkje.checked);
+  localStorage.setItem(opslagSleutel, String(vinkje.checked));
 });
+    
      const titel = document.createElement("span");
      titel.className = "omschrijving";
      titel.textContent = taak.titel;
