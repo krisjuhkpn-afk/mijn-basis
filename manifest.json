@@ -1,0 +1,12 @@
+
+{
+  "name": "Vandagen",
+  "short_name": "Vandagen",
+  "description": "Jouw dag, stap voor stap.",
+  "lang": "nl",
+  "start_url": "/mijn-basis/",
+  "scope": "/mijn-basis/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7a1735"
+}
