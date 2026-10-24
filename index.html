@@ -267,7 +267,7 @@ updateVoortgang();
  const vak = document.getElementById('agenda-afspraken');
  
  try {
-   const response = await fetch('https://krisjuh-agenda.krisjuh.workers.dev/');
+   const response = await fetch('https://krisjuh-agenda-test.krisjuh.workers.dev/');
    const afspraken = await response.json();
    const afsprakenTeller = document.getElementById('afspraken-teller');
  
