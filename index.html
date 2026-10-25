@@ -302,8 +302,7 @@ laadAgenda();
  const vak = document.getElementById("google-taken");
  
  try {
-   const response = await fetch(
-     "https://krisjuh-agenda-test.krisjuh.workers.dev/tasks"
+   const response = await fetch('/api/agenda')
    );
  
    if (!response.ok) {
@@ -363,8 +362,7 @@ laadActiepunten();
  
 async function testBeveiligdeVerbinding() {
   try {
-    const response = await fetch(
-      "https://krisjuh-agenda-test.krisjuh.workers.dev/",
+    const response = await fetch('/api/agenda'),
       {
         method: "GET",
         credentials: "include"
