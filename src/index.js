@@ -9,7 +9,7 @@ export default {
         ? "/tasks"
         : "/";
 
-      return env.AGENDA_API.fetch(
+      return env.AGENDA_SERVICE.fetch(
         new Request("https://internal" + endpoint)
       );
     }
