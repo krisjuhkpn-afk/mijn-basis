@@ -361,12 +361,7 @@ laadActiepunten();
  
 async function testBeveiligdeVerbinding() {
   try {
-    const response = await fetch('/api/agenda'),
-      {
-        method: "GET",
-        credentials: "include"
-      }
-    );
+    const response = await fetch('/api/agenda');
 
     console.log("Cloudflare test:", response.status);
   } catch (error) {
