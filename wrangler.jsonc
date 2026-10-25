@@ -5,5 +5,11 @@
   "main": "src/index.js",
   "assets": {
     "directory": "."
-  }
+  },
+  "services": [
+    {
+      "binding": "AGENDA_SERVICE",
+      "service": "krisjuh-agenda-test"
+    }
+  ]
 }
