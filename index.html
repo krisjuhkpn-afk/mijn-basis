@@ -302,8 +302,7 @@ laadAgenda();
  const vak = document.getElementById("google-taken");
  
  try {
-   const response = await fetch('/api/agenda')
-   );
+   const response = await fetch('/api/tasks');
  
    if (!response.ok) {
      throw new Error("Actiepunten ophalen mislukt");
