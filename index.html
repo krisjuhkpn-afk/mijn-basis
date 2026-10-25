@@ -337,9 +337,41 @@ const opslagSleutel = "actiepunt-" + vandaag + "-" + taak.id;
 vinkje.checked = localStorage.getItem(opslagSleutel) === "true";
 regel.classList.toggle("voltooid", vinkje.checked);
 
-vinkje.addEventListener("change", () => {
-  regel.classList.toggle("voltooid", vinkje.checked);
-  localStorage.setItem(opslagSleutel, String(vinkje.checked));
+vinkje.addEventListener("change", async () => {
+  const voltooid = vinkje.checked;
+
+  regel.classList.toggle("voltooid", voltooid);
+
+  if (!voltooid) {
+    localStorage.removeItem(opslagSleutel);
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/tasks/complete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: taak.id,
+        lijstId: taak.lijstId
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Voltooien mislukt");
+    }
+
+    localStorage.setItem(opslagSleutel, "true");
+
+  } catch (error) {
+    vinkje.checked = false;
+    regel.classList.remove("voltooid");
+    localStorage.removeItem(opslagSleutel);
+    alert("Het actiepunt kon niet worden voltooid.");
+    console.error(error);
+  }
 });
     
      const titel = document.createElement("span");
