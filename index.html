@@ -38,9 +38,19 @@
   margin: 0 max(0px, calc((100% - 760px) / 2)) 0 auto;
   cursor: pointer;
 }
+ 
  #afspraken-teller {
   max-width: 760px;
   margin: -35px auto 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+}
+
+ #priodingels-teller {
+  max-width: 760px;
+  margin: -10px auto 15px;
   padding-left: 15px;
   box-sizing: border-box;
   text-align: left;
@@ -216,6 +226,7 @@
 <p id="blauwe-dag" style="display:none;">Vandaag is een blauwe dag</p>
 <p id="afspraken-teller"></p>
 <p id="actiepunten-teller"></p>
+<p id="priodingels-teller"></p>
  
 <h2 class="basis-titel">Dagelijkse Basis</h2>
 <p id="voortgang"></p>
@@ -363,6 +374,9 @@ laadAgenda();
    const taken = alleTaken.filter(
      taak => taak.lijst === "Openstaande Actiepunten"
    );
+  
+  document.getElementById("priodingels-teller").textContent =
+  taken.length + " priodingels vandaag";
  
    vak.innerHTML = "";
  
