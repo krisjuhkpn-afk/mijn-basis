@@ -20,9 +20,10 @@
  }
 
  .vandagen-banner {
-  max-width: 760px;
+  max-width: 850px;
   margin: 15px auto 10px;
   text-align: center;
+  position: relative;
 }
 
 .vandagen-banner img {
@@ -69,14 +70,20 @@
     cursor: pointer;
 }
 
- #datum,
- #afspraken-teller,
- #actiepunten-teller {
-  max-width: 760px;
-  margin: 4px auto;
+ #datum {
+  position: absolute;
+  bottom: 8%;
+  left: 9%;
+  margin: 0;
   text-align: left;
+  color: #a64d70;
   font-size: 15px;
+  font-weight: 600;
+}
+ .datum-jaar {
+  color: #c987a3;
   font-weight: 400;
+  font-size: 14px;
 }
  
 #voortgang {
@@ -186,8 +193,8 @@
  
 <div class="vandagen-banner">
   <img src="vandagen banner.png" alt="Vandagen">
-</div> 
-<p id="datum"></p>
+  <p id="datum"></p>
+</div>
 <p id="blauwe-dag" style="display:none;">Vandaag is een blauwe dag</p>
 <p id="afspraken-teller"></p>
 <p id="actiepunten-teller"></p>
@@ -236,13 +243,17 @@
 <script>
 const vandaag = new Date().toLocaleDateString('en-CA');
 const opgeslagenDag = localStorage.getItem('dashboardDatum');
-document.getElementById('datum').textContent =
- new Date().toLocaleDateString('nl-NL', {
-   weekday: 'long',
-   day: 'numeric',
-   month: 'long',
-   year: 'numeric'
- });
+const nu = new Date();
+
+const dagMaand = nu.toLocaleDateString('nl-NL', {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'long'
+});
+
+document.getElementById('datum').innerHTML =
+  dagMaand + '<br><span class="datum-jaar">' +
+  nu.getFullYear() + '</span>';
  
 if (opgeslagenDag !== vandaag) {
    localStorage.removeItem('dashboardKlaar');
