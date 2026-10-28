@@ -572,6 +572,8 @@ function toonBlauweDag() {
   document.body.classList.toggle("blauwe-dag-actief", actief);
 
   blauweDagMelding.style.display = actief ? "block" : "none";
+  document.getElementById("afspraken-teller").style.display = actief ? "none" : "";
+  document.getElementById("priodingels-teller").style.display = actief ? "none" : "";
   document.getElementById("vandaag-is-blauw").style.display =
   actief ? "block" : "none";
   blauweDagIcoon.setAttribute("aria-pressed", String(actief));
