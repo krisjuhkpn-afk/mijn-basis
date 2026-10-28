@@ -580,6 +580,7 @@ function toonBlauweDag() {
   const actief = localStorage.getItem(blauweDagSleutel) === "true";
   document.body.classList.toggle("blauwe-dag-actief", actief);
   document.getElementById("gewone-dag-banner").style.display = actief ? "none" : "";
+  document.getElementById("blauwe-dag-banner").style.display = actief ? "block" : "none";
 
   blauweDagMelding.style.display = actief ? "block" : "none";
   document.getElementById("afspraken-teller").style.display = actief ? "none" : "";
