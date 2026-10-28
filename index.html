@@ -428,6 +428,7 @@ vinkje.addEventListener("change", async () => {
     }
 
     localStorage.setItem(opslagSleutel, "true");
+    laadActiepunten();
 
   } catch (error) {
     vinkje.checked = false;
