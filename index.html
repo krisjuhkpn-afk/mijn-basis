@@ -428,6 +428,9 @@ vinkje.addEventListener("change", async () => {
     }
 
     localStorage.setItem(opslagSleutel, "true");
+   const teller = document.getElementById("priodingels-teller");
+const huidigAantal = Number(teller.textContent.match(/^\d+/)?.[0] || 0);
+teller.textContent = Math.max(0, huidigAantal - 1) + " priodingels vandaag";
 
   } catch (error) {
     vinkje.checked = false;
