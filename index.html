@@ -221,7 +221,12 @@
   <p id="datum"></p>
 </div>
  
- <img src="icoontje blauwe dag.png" alt="Mijn Blauwe Dag" id="blauwe-dag-icoon">
+ <img src="icoontje blauwe dag.png"
+     alt="Mijn Blauwe Dag"
+     id="blauwe-dag-icoon"
+     role="button"
+     tabindex="0"
+     aria-pressed="false">
  
 <p id="blauwe-dag" style="display:none;">Vandaag is een blauwe dag</p>
 <p id="afspraken-teller"></p>
@@ -512,6 +517,37 @@ async function testBeveiligdeVerbinding() {
 
 // testBeveiligdeVerbinding();
 
+ // Mijn Blauwe Dag
+const blauweDagIcoon = document.getElementById("blauwe-dag-icoon");
+const blauweDagMelding = document.getElementById("blauwe-dag");
+
+const blauweDagSleutel =
+  "blauwe-dag-" + new Date().toLocaleDateString("sv-SE");
+
+function toonBlauweDag() {
+  const actief = localStorage.getItem(blauweDagSleutel) === "true";
+
+  blauweDagMelding.style.display = actief ? "block" : "none";
+  blauweDagIcoon.setAttribute("aria-pressed", String(actief));
+}
+
+function wisselBlauweDag() {
+  const actief = localStorage.getItem(blauweDagSleutel) === "true";
+  localStorage.setItem(blauweDagSleutel, String(!actief));
+  toonBlauweDag();
+}
+
+blauweDagIcoon.addEventListener("click", wisselBlauweDag);
+
+blauweDagIcoon.addEventListener("keydown", function(event) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    wisselBlauweDag();
+  }
+});
+
+toonBlauweDag();
+ 
 </script>
  
 </body>
