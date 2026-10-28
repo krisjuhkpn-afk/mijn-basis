@@ -381,8 +381,8 @@ laadAgenda();
    vak.innerHTML = "";
  
    if (taken.length === 0) {
-     vak.textContent = "Geen openstaande actiepunten";
-     return;
+  vak.textContent = "";
+    
    }
  
    taken.forEach(taak => {
@@ -399,7 +399,7 @@ regel.appendChild(vinkje);
 const opslagSleutel = "actiepunt-" + vandaag + "-" + taak.id;
 
 vinkje.checked = localStorage.getItem(opslagSleutel) === "true";
-regel.classList.toggle("voltooid", vinkje.checked);
+   regel.classList.toggle("voltooid", vinkje.checked);
 
 vinkje.addEventListener("change", async () => {
   const voltooid = vinkje.checked;
@@ -428,6 +428,21 @@ vinkje.addEventListener("change", async () => {
     }
 
     localStorage.setItem(opslagSleutel, "true");
+   const bewaardeTaken = JSON.parse(
+  localStorage.getItem("afgeronde-priodingels-" + vandaag) || "[]"
+);
+
+if (!bewaardeTaken.some(item => item.id === taak.id)) {
+  bewaardeTaken.push({
+    id: taak.id,
+    titel: taak.titel
+  });
+}
+
+localStorage.setItem(
+  "afgeronde-priodingels-" + vandaag,
+  JSON.stringify(bewaardeTaken)
+);
    const teller = document.getElementById("priodingels-teller");
 const huidigAantal = Number(teller.textContent.match(/^\d+/)?.[0] || 0);
 teller.textContent = Math.max(0, huidigAantal - 1) + " priodingels vandaag";
@@ -448,7 +463,34 @@ teller.textContent = Math.max(0, huidigAantal - 1) + " priodingels vandaag";
      regel.appendChild(titel);
      vak.appendChild(regel);
    });
- 
+
+  const vandaagDatum = new Date().toLocaleDateString("sv-SE");
+
+const afgerondeTaken = JSON.parse(
+  localStorage.getItem("afgeronde-priodingels-" + vandaagDatum) || "[]"
+);
+
+afgerondeTaken.forEach(taak => {
+  if (taken.some(openTaak => openTaak.id === taak.id)) return;
+
+  const regel = document.createElement("div");
+  regel.className = "afspraak voltooid";
+
+  const vinkje = document.createElement("input");
+  vinkje.type = "checkbox";
+  vinkje.className = "actiepunt-vinkje";
+  vinkje.checked = true;
+  vinkje.disabled = true;
+
+  const titel = document.createElement("span");
+  titel.className = "omschrijving";
+  titel.textContent = taak.titel;
+
+  regel.appendChild(vinkje);
+  regel.appendChild(titel);
+  vak.appendChild(regel);
+});
+  
  } catch (error) {
    vak.textContent = "Actiepunten konden niet worden geladen";
    console.error(error);
