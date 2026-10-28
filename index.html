@@ -575,6 +575,7 @@ const blauweDagSleutel =
 function toonBlauweDag() {
   const actief = localStorage.getItem(blauweDagSleutel) === "true";
   document.body.classList.toggle("blauwe-dag-actief", actief);
+  document.getElementById("gewone-dag-banner").style.display = actief ? "none" : "";
 
   blauweDagMelding.style.display = actief ? "block" : "none";
   document.getElementById("afspraken-teller").style.display = actief ? "none" : "";
