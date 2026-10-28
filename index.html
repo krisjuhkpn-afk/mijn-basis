@@ -220,8 +220,13 @@
   <img src="vandagen banner.png" alt="Vandagen">
   <p id="datum"></p>
 </div>
- 
+
  <img src="roze_blaadje_transparant.png"
+     alt="Vandaag is Blauw"
+     id="vandaag-is-blauw"
+     style="display:none;">
+ 
+ <img src="icoontje blauwe dag.png"
      alt="Mijn Blauwe Dag"
      id="blauwe-dag-icoon"
      role="button"
@@ -529,6 +534,9 @@ function toonBlauweDag() {
 
   blauweDagMelding.style.display = actief ? "block" : "none";
   blauweDagIcoon.setAttribute("aria-pressed", String(actief));
+  blauweDagIcoon.src = actief
+  ? "roze_blaadje_transparant.png"
+  : "icoontje blauwe dag.png";
 }
 
 function wisselBlauweDag() {
