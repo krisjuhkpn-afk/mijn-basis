@@ -306,7 +306,7 @@
 </div>
 
 
-<section class="afspraken">
+<section class="afspraken" id="afspraken-sectie">
    <h2>Afspraken van de dag</h2>
  
    <div id="agenda-afspraken"></div>
@@ -573,6 +573,8 @@ function toonBlauweDag() {
 
   blauweDagMelding.style.display = actief ? "block" : "none";
   document.getElementById("afspraken-teller").style.display = actief ? "none" : "";
+  document.getElementById("afspraken-sectie").style.display = actief ? "none" : "";
+  document.getElementById("openstaande-actiepunten").style.display = actief ? "none" : "";
   document.getElementById("priodingels-teller").style.display = actief ? "none" : "";
   document.getElementById("vandaag-is-blauw").style.display =
   actief ? "block" : "none";
