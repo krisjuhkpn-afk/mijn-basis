@@ -533,6 +533,8 @@ function toonBlauweDag() {
   const actief = localStorage.getItem(blauweDagSleutel) === "true";
 
   blauweDagMelding.style.display = actief ? "block" : "none";
+  document.getElementById("vandaag-is-blauw").style.display =
+  actief ? "block" : "none";
   blauweDagIcoon.setAttribute("aria-pressed", String(actief));
   blauweDagIcoon.src = actief
   ? "roze_blaadje_transparant.png"
