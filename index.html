@@ -288,22 +288,7 @@
   <img src="Een blauwe dag van rust.png" alt="Vandaag is een blauwe dag">
 </div>
 
- <div class="dag-keuze">
-
-  <img src="vandaag_is_blauw_transparant.png"
-       alt="Vandaag is Blauw"
-       id="vandaag-is-blauw"
-       style="display:none;">
-
-  <img src="icoontje blauwe dag.png"
-       alt="Mijn Blauwe Dag"
-       id="blauwe-dag-icoon"
-       role="button"
-       tabindex="0"
-       aria-pressed="false">
-
-</div>
- 
+  
 <p id="blauwe-dag" style="display:none;"></p>
 <p id="afspraken-teller"></p>
 <p id="actiepunten-teller"></p>
@@ -610,7 +595,7 @@ async function testBeveiligdeVerbinding() {
 // testBeveiligdeVerbinding();
 
  // Mijn Blauwe Dag
-const blauweDagIcoon = document.getElementById("blauwe-dag-icoon");
+const blauweDagIcoon = document.getElementById("nav-wissel");
 const blauweDagMelding = document.getElementById("blauwe-dag");
 
 const blauweDagSleutel =
@@ -628,8 +613,6 @@ function toonBlauweDag() {
   document.getElementById("openstaande-actiepunten").style.display = actief ? "none" : "";
   document.getElementById("priodingels-teller").style.display = actief ? "none" : "";
   document.getElementById("blauwe-dag-afbeelding").style.display = actief ? "block" : "none";
-  document.getElementById("vandaag-is-blauw").style.display =
-  actief ? "block" : "none";
   blauweDagIcoon.setAttribute("aria-pressed", String(actief));
   blauweDagIcoon.src = actief
   ? "roze blad wisselicoon.png"
@@ -642,15 +625,8 @@ function wisselBlauweDag() {
   toonBlauweDag();
 }
 
-blauweDagIcoon.addEventListener("click", wisselBlauweDag);
  document.getElementById("nav-wissel").addEventListener("click", wisselBlauweDag);
 
-blauweDagIcoon.addEventListener("keydown", function(event) {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    wisselBlauweDag();
-  }
-});
 
 toonBlauweDag();
  
