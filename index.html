@@ -323,12 +323,6 @@
   <a href="#"><img src="15 medicamentels.png" alt="Medicamentels"></a>
 </div>
 
- <div id="blauwe-dag-afbeelding" style="display:none; max-width:760px; margin:20px auto;">
-  <img src="Een blauwe dag van rust.png"
-       alt="Vandaag is een blauwe dag"
-       style="display:block; width:100%; height:auto;">
-</div>
-
 <section class="afspraken" id="afspraken-sectie">
    <h2>Afspraken van de dag</h2>
  
@@ -612,7 +606,6 @@ function toonBlauweDag() {
   document.getElementById("afspraken-sectie").style.display = actief ? "none" : "";
   document.getElementById("openstaande-actiepunten").style.display = actief ? "none" : "";
   document.getElementById("priodingels-teller").style.display = actief ? "none" : "";
-  document.getElementById("blauwe-dag-afbeelding").style.display = actief ? "block" : "none";
   blauweDagIcoon.setAttribute("aria-pressed", String(actief));
   blauweDagIcoon.src = actief
   ? "roze blad wisselicoon.png"
