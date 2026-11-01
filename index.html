@@ -75,10 +75,10 @@
   background-color: #DCEFFD;
 }
 
- .blauwe-dag-actief h1 {
+.blauwe-dag-actief h1:not(.vandagen-blauw) {
   display: none;
 }
-
+ 
  .blauwe-dag-actief #voortgang {
   display: none;
 }
@@ -296,6 +296,15 @@
   margin-left: auto;
 }
  
+ .blauwe-dag-actief .vandagen-blauw {
+  display: block;
+  color: #024BAB;
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px 0 10px;
+}
+ 
 </style>
 </head>
  
@@ -307,6 +316,7 @@
 </div>
 
  <div id="blauwe-dag-banner" style="display:none;">
+  <h1 class="vandagen-blauw">Vandagen</h1>
   <img src="Een blauwe dag van rust.png" alt="Vandaag is een blauwe dag">
 </div>
 
