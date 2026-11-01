@@ -633,6 +633,14 @@ function toonBlauweDag() {
   document.getElementById("gewone-dag-banner").style.display = actief ? "none" : "";
   document.getElementById("blauwe-dag-banner").style.display = actief ? "block" : "none";
 
+ const basisTitel = document.querySelector(".basis-titel");
+
+basisTitel.textContent = actief
+  ? "Vandaag mag minder"
+  : "Dagelijkse Basis";
+
+basisTitel.style.color = actief ? "#024BAB" : "";
+ 
   blauweDagMelding.style.display = actief ? "block" : "none";
   document.getElementById("afspraken-teller").style.display = actief ? "none" : "";
   document.getElementById("afspraken-sectie").style.display = actief ? "none" : "";
