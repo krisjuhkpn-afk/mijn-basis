@@ -20,12 +20,19 @@
  }
 
  .vandagen-banner {
-  max-width: 850px;
-  margin: 15px auto 0px;
+  width: calc(100% + 60px);
+  max-width: none;
+  margin: 0 -30px;
   text-align: center;
   position: relative;
 }
 
+@media (max-width: 600px) {
+  .vandagen-banner {
+    width: calc(100% + 20px);
+    margin: 0 -10px;
+  }
+}
 .vandagen-banner img {
   display: block;
   width: 100%;
