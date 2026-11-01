@@ -630,6 +630,17 @@ const blauweDagSleutel =
 function toonBlauweDag() {
   const actief = localStorage.getItem(blauweDagSleutel) === "true";
   document.body.classList.toggle("blauwe-dag-actief", actief);
+ document.getElementById("nav-agenda").src = actief
+  ? "agenda_blauw.png"
+  : "agenda_roze.png";
+
+document.getElementById("nav-doedingels").src = actief
+  ? "doedingels_blauw.png"
+  : "doedingels_roze.png";
+
+document.getElementById("nav-reflexel").src = actief
+  ? "reflexel_blauw.png"
+  : "reflexel_roze.png";
   document.getElementById("gewone-dag-banner").style.display = actief ? "none" : "";
   document.getElementById("blauwe-dag-banner").style.display = actief ? "block" : "none";
 
