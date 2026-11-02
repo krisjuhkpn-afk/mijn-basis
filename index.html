@@ -656,6 +656,12 @@ const blauweDagSleutel =
 function toonBlauweDag() {
   const actief = localStorage.getItem(blauweDagSleutel) === "true";
   document.body.classList.toggle("blauwe-dag-actief", actief);
+ document.querySelectorAll(".dashboard img").forEach(img => {
+  const rozeBestand = img.getAttribute("src").replace(/ blauw(?=\.png$)/, "");
+  const blauwBestand = rozeBestand.replace(/\.png$/, " blauw.png");
+
+  img.src = actief ? blauwBestand : rozeBestand;
+});
  document.getElementById("nav-agenda").src = actief
   ? "agenda_blauw.png"
   : "agenda_roze.png";
