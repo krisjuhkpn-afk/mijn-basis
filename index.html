@@ -685,6 +685,8 @@ const blauweDagSleutel =
 function toonBlauweDag() {
   const actief = localStorage.getItem(blauweDagSleutel) === "true";
   document.body.classList.toggle("blauwe-dag-actief", actief);
+ document.querySelector(".blauwe-rust-afbeelding").style.display =
+  actief ? "block" : "none";
  document.querySelectorAll(".dashboard img").forEach(img => {
   const rozeBestand = img.getAttribute("src").replace(/ blauw(?=\.png$)/, "");
   const blauwBestand = rozeBestand.replace(/\.png$/, " blauw.png");
