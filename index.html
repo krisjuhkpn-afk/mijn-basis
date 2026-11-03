@@ -88,8 +88,11 @@
   display: none;
 }
  
- .blauwe-dag-actief #voortgang {
-  display: none;
+.blauwe-dag-actief #voortgang {
+  display: block;
+  color: #024BAB;
+  font-size: 13px;
+  text-transform: lowercase;
 }
  
 .blauwe-dag-actief .dashboard {
@@ -463,7 +466,9 @@ const iconen = document.querySelectorAll('.dashboard a');
  function updateVoortgang() {
  const aantalKlaar = document.querySelectorAll('.dashboard a.done').length;
  document.getElementById('voortgang').textContent =
-   aantalKlaar + ' van ' + iconen.length + ' gedaan';
+  document.body.classList.contains('blauwe-dag-actief')
+    ? 'vandaag mag meer'
+    : aantalKlaar + ' van ' + iconen.length + ' gedaan';
   const percentage = (aantalKlaar / iconen.length) * 100;
 document.getElementById('voortgang-vulling').style.width = percentage + '%';
 }
