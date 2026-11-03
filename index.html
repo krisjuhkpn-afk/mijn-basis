@@ -275,9 +275,16 @@
   cursor: pointer;
 }
  #blauwe-dag-banner {
-  width: 100%;
-  max-width: 760px;
-  margin: 15px auto;
+  width: calc(100% + 60px);
+  max-width: none;
+  margin: 0 -30px;
+}
+
+@media (max-width: 600px) {
+  #blauwe-dag-banner {
+    width: calc(100% + 20px);
+    margin: 0 -10px;
+  }
 }
 
 #blauwe-dag-banner img {
@@ -367,7 +374,6 @@
 </div>
 
  <div id="blauwe-dag-banner" style="display:none;">
-  <img class="vandagen-blauw-logo" src="vandagen-blauw.png" alt="Vandagen">
   <img src="Een blauwe dag van rust.png" alt="Vandaag is een blauwe dag">
 </div>
 
