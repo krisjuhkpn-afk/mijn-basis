@@ -467,7 +467,7 @@ const iconen = document.querySelectorAll('.dashboard a');
  const aantalKlaar = document.querySelectorAll('.dashboard a.done').length;
  document.getElementById('voortgang').textContent =
   document.body.classList.contains('blauwe-dag-actief')
-    ? 'vandaag mag meer'
+    ? 'vandaag mag minder'
     : aantalKlaar + ' van ' + iconen.length + ' gedaan';
   const percentage = (aantalKlaar / iconen.length) * 100;
 document.getElementById('voortgang-vulling').style.width = percentage + '%';
