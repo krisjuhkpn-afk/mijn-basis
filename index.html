@@ -191,8 +191,12 @@
 
  .basis-titel {
   color: #B20231;
-  margin-top: 35px;
-  font-size: 20px;
+  margin-top: 45px;
+  font-size: 18px;
+}
+
+ .blauwe-dag-actief .basis-titel {
+  color: #024BAB;
 }
  
 .afspraak {
@@ -711,7 +715,7 @@ document.getElementById("nav-reflexel").src = actief
  const basisTitel = document.querySelector(".basis-titel");
 
 basisTitel.textContent = actief
-  ? "Wat vandaag past"
+  ? "Dagelijkse Basis"
   : "Dagelijkse Basis";
 
 basisTitel.style.color = actief ? "#024BAB" : "";
