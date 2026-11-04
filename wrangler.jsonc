@@ -2,7 +2,14 @@
 {
   "name": "mijn-basis-test",
   "compatibility_date": "2026-10-12",
+  "main": "src/index.js",
   "assets": {
     "directory": "."
-  }
+  },
+  "services": [
+    {
+      "binding": "AGENDA_SERVICE",
+      "service": "krisjuh-agenda-test"
+    }
+  ]
 }
