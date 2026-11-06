@@ -764,6 +764,18 @@ function wisselBlauweDag() {
 
 
 toonBlauweDag();
+
+ // Mijn Reflexel openen
+document.getElementById("nav-reflexel").addEventListener("click", function() {
+  const pagina = document.getElementById("reflexel-pagina");
+
+  pagina.style.display =
+    pagina.style.display === "none" ? "block" : "none";
+
+  if (pagina.style.display === "block") {
+    pagina.scrollIntoView({ behavior: "smooth" });
+  }
+});
  
 </script>
 
