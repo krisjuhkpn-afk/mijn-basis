@@ -855,35 +855,24 @@ document.getElementById("nav-reflexel").addEventListener("click", function() {
 });
 
 
- // Overzicht van eerdere Reflexels
+// Overzicht van bewaarde Reflexels
 function toonReflexelGeschiedenis() {
   const overzicht = document.getElementById("reflexel-overzicht");
   overzicht.innerHTML = "";
 
-  const vandaag = new Date().toLocaleDateString("sv-SE");
+  const reflexels = JSON.parse(
+    localStorage.getItem("vandagen-reflexels") || "[]"
+  );
 
-  const datums = Object.keys(localStorage)
-    .filter(sleutel =>
-      /^vandagen-reflexel-\d{4}-\d{2}-\d{2}$/.test(sleutel)
-    )
-    .map(sleutel => sleutel.replace("vandagen-reflexel-", ""))
-    .filter(datum =>
-      datum !== vandaag &&
-      (localStorage.getItem("vandagen-reflexel-" + datum) || "").trim()
-    )
-    .sort()
-    .reverse();
-
-  datums.forEach(datum => {
+  reflexels.slice().reverse().forEach(reflexel => {
     const knop = document.createElement("button");
-    const [jaar, maand, dag] = datum.split("-");
+    const [jaar, maand, dag] = reflexel.datum.split("-");
 
-    knop.textContent = `${dag}-${maand}-${jaar}`;
     knop.type = "button";
+    knop.textContent = `${dag}-${maand}-${jaar}`;
 
     knop.addEventListener("click", function() {
-      const tekst = localStorage.getItem("vandagen-reflexel-" + datum);
-      alert(tekst);
+      alert(reflexel.tekst);
     });
 
     overzicht.appendChild(knop);
@@ -891,7 +880,6 @@ function toonReflexelGeschiedenis() {
 }
 
 toonReflexelGeschiedenis();
-
  // Mijn actieve Reflexel
 const reflexelTekst = document.getElementById("reflexel-tekst");
 const actieveReflexelSleutel = "vandagen-actieve-reflexel";
