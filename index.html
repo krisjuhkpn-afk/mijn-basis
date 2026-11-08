@@ -866,6 +866,43 @@ reflexelTekst.value = localStorage.getItem(reflexelSleutel) || "";
 reflexelTekst.addEventListener("input", function() {
   localStorage.setItem(reflexelSleutel, reflexelTekst.value);
 });
+
+ // Overzicht van eerdere Reflexels
+function toonReflexelGeschiedenis() {
+  const overzicht = document.getElementById("reflexel-overzicht");
+  overzicht.innerHTML = "";
+
+  const vandaag = new Date().toLocaleDateString("sv-SE");
+
+  const datums = Object.keys(localStorage)
+    .filter(sleutel =>
+      /^vandagen-reflexel-\d{4}-\d{2}-\d{2}$/.test(sleutel)
+    )
+    .map(sleutel => sleutel.replace("vandagen-reflexel-", ""))
+    .filter(datum =>
+      datum !== vandaag &&
+      (localStorage.getItem("vandagen-reflexel-" + datum) || "").trim()
+    )
+    .sort()
+    .reverse();
+
+  datums.forEach(datum => {
+    const knop = document.createElement("button");
+    const [jaar, maand, dag] = datum.split("-");
+
+    knop.textContent = `${dag}-${maand}-${jaar}`;
+    knop.type = "button";
+
+    knop.addEventListener("click", function() {
+      const tekst = localStorage.getItem("vandagen-reflexel-" + datum);
+      alert(tekst);
+    });
+
+    overzicht.appendChild(knop);
+  });
+}
+
+toonReflexelGeschiedenis();
  
 </script>
 
