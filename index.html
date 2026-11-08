@@ -852,7 +852,8 @@ document.getElementById("nav-reflexel").addEventListener("click", function() {
 
  // Mijn Reflexel automatisch bewaren
 const reflexelTekst = document.getElementById("reflexel-tekst");
-const reflexelSleutel = "vandagen-reflexel";
+const reflexelSleutel =
+  "vandagen-reflexel-" + new Date().toLocaleDateString("sv-SE");
 
 // Eerder geschreven tekst terughalen
 reflexelTekst.value = localStorage.getItem(reflexelSleutel) || "";
