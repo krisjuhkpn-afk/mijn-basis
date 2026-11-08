@@ -831,6 +831,18 @@ document.getElementById("nav-reflexel").addEventListener("click", function() {
     pagina.scrollIntoView({ behavior: "smooth" });
   }
 });
+
+ // Mijn Reflexel automatisch bewaren
+const reflexelTekst = document.getElementById("reflexel-tekst");
+const reflexelSleutel = "vandagen-reflexel";
+
+// Eerder geschreven tekst terughalen
+reflexelTekst.value = localStorage.getItem(reflexelSleutel) || "";
+
+// Automatisch bewaren bij iedere wijziging
+reflexelTekst.addEventListener("input", function() {
+  localStorage.setItem(reflexelSleutel, reflexelTekst.value);
+});
  
 </script>
 
