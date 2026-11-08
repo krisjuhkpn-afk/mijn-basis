@@ -934,6 +934,39 @@ reflexelTekst.addEventListener("input", function() {
     );
   }
 });
+
+ // Huidige Reflexel afronden en een nieuwe beginnen
+document.getElementById("reflexel-nieuw").addEventListener("click", function() {
+  const tekst = reflexelTekst.value.trim();
+
+  // Geen tekst? Dan hoeft er niets bewaard te worden.
+  if (!tekst) {
+    alert("Je kunt beginnen met je nieuwe Reflexel.");
+    return;
+  }
+
+  const reflexels = JSON.parse(
+    localStorage.getItem("vandagen-reflexels") || "[]"
+  );
+
+  reflexels.push({
+    id: actieveReflexel.id,
+    datum: actieveReflexel.datum,
+    tekst: tekst
+  });
+
+  try {
+    localStorage.setItem("vandagen-reflexels", JSON.stringify(reflexels));
+    localStorage.removeItem(actieveReflexelSleutel);
+
+    actieveReflexel = null;
+    reflexelTekst.value = "";
+
+    alert("Je Reflexel is bewaard. Je kunt een nieuwe beginnen.");
+  } catch (error) {
+    alert("Bewaren is niet gelukt. Je tekst blijft staan.");
+  }
+});
  
 </script>
 
