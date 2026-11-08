@@ -922,8 +922,17 @@ function toonReflexelGeschiedenis() {
     knop.textContent = `${dag}-${maand}-${jaar}`;
 
     knop.addEventListener("click", function() {
-      alert(reflexel.tekst);
-    });
+  const bewaardVak = document.getElementById("reflexel-bewaard");
+  const bewaardeTekst = document.getElementById("reflexel-bewaarde-tekst");
+
+  bewaardeTekst.value = reflexel.tekst;
+  bewaardVak.style.display = "block";
+
+  bewaardVak.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
 
     overzicht.appendChild(knop);
   });
