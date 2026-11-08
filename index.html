@@ -854,18 +854,6 @@ document.getElementById("nav-reflexel").addEventListener("click", function() {
   }
 });
 
- // Mijn Reflexel automatisch bewaren
-const reflexelTekst = document.getElementById("reflexel-tekst");
-const reflexelSleutel =
-  "vandagen-reflexel-" + new Date().toLocaleDateString("sv-SE");
-
-// Eerder geschreven tekst terughalen
-reflexelTekst.value = localStorage.getItem(reflexelSleutel) || "";
-
-// Automatisch bewaren bij iedere wijziging
-reflexelTekst.addEventListener("input", function() {
-  localStorage.setItem(reflexelSleutel, reflexelTekst.value);
-});
 
  // Overzicht van eerdere Reflexels
 function toonReflexelGeschiedenis() {
@@ -903,6 +891,49 @@ function toonReflexelGeschiedenis() {
 }
 
 toonReflexelGeschiedenis();
+
+ // Mijn actieve Reflexel
+const reflexelTekst = document.getElementById("reflexel-tekst");
+const actieveReflexelSleutel = "vandagen-actieve-reflexel";
+
+// Bestaande Reflexel terughalen
+let actieveReflexel;
+
+try {
+  actieveReflexel = JSON.parse(
+    localStorage.getItem(actieveReflexelSleutel) || "null"
+  );
+} catch (error) {
+  actieveReflexel = null;
+}
+
+// Eerder geschreven tekst tonen
+if (actieveReflexel) {
+  reflexelTekst.value = actieveReflexel.tekst;
+}
+
+// Automatisch bewaren tijdens het schrijven
+reflexelTekst.addEventListener("input", function() {
+  const tekst = reflexelTekst.value;
+
+  // Pas een datum vastleggen zodra je iets schrijft
+  if (!actieveReflexel && tekst.trim()) {
+    actieveReflexel = {
+      id: Date.now(),
+      datum: new Date().toLocaleDateString("sv-SE"),
+      tekst: ""
+    };
+  }
+
+  if (actieveReflexel) {
+    actieveReflexel.tekst = tekst;
+
+    localStorage.setItem(
+      actieveReflexelSleutel,
+      JSON.stringify(actieveReflexel)
+    );
+  }
+});
  
 </script>
 
