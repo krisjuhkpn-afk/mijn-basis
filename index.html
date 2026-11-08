@@ -980,6 +980,7 @@ function toonReflexelGeschiedenis() {
   const bewaardeTekst = document.getElementById("reflexel-bewaarde-tekst");
 
   bewaardeTekst.value = reflexel.tekst;
+     bewaardVak.dataset.reflexelId = reflexel.id;
   bewaardVak.style.display = "block";
 
   bewaardVak.scrollIntoView({
@@ -1068,6 +1069,37 @@ document.getElementById("reflexel-nieuw").addEventListener("click", function() {
   } catch (error) {
     alert("Bewaren is niet gelukt. Je tekst blijft staan.");
   }
+});
+
+ // Wijzigingen in een bewaarde Reflexel opslaan
+document.getElementById("reflexel-wijzigingen-opslaan")
+  .addEventListener("click", function() {
+
+    const bewaardVak = document.getElementById("reflexel-bewaard");
+    const id = bewaardVak.dataset.reflexelId;
+    const tekst = document.getElementById("reflexel-bewaarde-tekst").value;
+
+    if (!id) return;
+
+    const reflexels = JSON.parse(
+      localStorage.getItem("vandagen-reflexels") || "[]"
+    );
+
+    const reflexel = reflexels.find(item => String(item.id) === id);
+
+    if (!reflexel) {
+      alert("Deze Reflexel kon niet worden gevonden.");
+      return;
+    }
+
+    reflexel.tekst = tekst;
+
+    try {
+      localStorage.setItem("vandagen-reflexels", JSON.stringify(reflexels));
+      alert("Je wijzigingen zijn opgeslagen.");
+    } catch (error) {
+      alert("Opslaan is niet gelukt.");
+    }
 });
  
 </script>
