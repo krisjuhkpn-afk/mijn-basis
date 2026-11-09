@@ -1052,9 +1052,10 @@ document.getElementById("reflexel-nieuw").addEventListener("click", function() {
   const tekst = reflexelTekst.value.trim();
 
   // Geen tekst? Dan hoeft er niets bewaard te worden.
-  if (!tekst) {
-    return;
-  }
+ if (!tekst) {
+  document.getElementById("reflexel-bewaard").style.display = "none";
+  return;
+}
 
   const reflexels = JSON.parse(
     localStorage.getItem("vandagen-reflexels") || "[]"
@@ -1072,6 +1073,7 @@ document.getElementById("reflexel-nieuw").addEventListener("click", function() {
 
     actieveReflexel = null;
     reflexelTekst.value = "";
+   document.getElementById("reflexel-bewaard").style.display = "none";
    toonReflexelGeschiedenis();
 
   } catch (error) {
