@@ -996,7 +996,15 @@ function toonReflexelGeschiedenis() {
   const bewaardVak = document.getElementById("reflexel-bewaard");
   const bewaardeTekst = document.getElementById("reflexel-bewaarde-tekst");
 
-  bewaardeTekst.value = reflexel.tekst;
+  const actueleReflexels = JSON.parse(
+  localStorage.getItem("vandagen-reflexels") || "[]"
+);
+const actueleReflexel = actueleReflexels.find(
+  item => item.id === reflexel.id
+);
+bewaardeTekst.value = actueleReflexel
+  ? actueleReflexel.tekst
+  : reflexel.tekst;
      bewaardVak.dataset.reflexelId = reflexel.id;
   bewaardVak.style.display = "block";
 
