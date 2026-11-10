@@ -610,6 +610,13 @@
     rows="8"
     aria-label="Bewaarde Reflexel"
   ></textarea>
+    <button id="rosebud-bewaard-kopieer" type="button"
+  style="display:block; margin:12px auto; padding:0;
+  border:none; background:transparent; cursor:pointer;"
+  aria-label="Kopieer bewaarde Reflexel voor Rosebud">
+  <img src="rosebud.png" alt="Rosebud"
+    style="width:42px; height:42px; border-radius:10px;">
+</button>
     <button
   id="reflexel-wijzigingen-opslaan"
   type="button"
@@ -1144,7 +1151,7 @@ document.getElementById("rosebud-kopieer").addEventListener("click", async funct
 
   try {
     await navigator.clipboard.writeText(tekst);
-    alert("Gekopieerd! Je kunt de tekst nu in Rosebud plakken.");
+    
   } catch (error) {
     alert("Kopiëren is niet gelukt.");
   }
