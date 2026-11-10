@@ -772,9 +772,12 @@ laadAgenda();
  
    const alleTaken = await response.json();
  
-   const taken = alleTaken.filter(
-     taak => taak.lijst === "Openstaande Actiepunten"
-   );
+   const vandaag = new Date().toLocaleDateString("sv-SE");
+
+const taken = alleTaken.filter(taak => {
+  return taak.lijst?.toLowerCase() === "openstaande actiepunten"
+    && taak.datum?.slice(0, 10) === vandaag;
+});
   
   document.getElementById("priodingels-teller").textContent =
   taken.length + " priodingels vandaag";
