@@ -781,6 +781,25 @@ laadAgenda();
    }
  
    const alleTaken = await response.json();
+
+  const doedingels = alleTaken.filter(taak =>
+  taak.lijst?.toLowerCase() === "mijn taken"
+  );
+
+  const doedingelsLijst = document.getElementById("doedingels-lijst");
+
+doedingelsLijst.innerHTML = "";
+
+doedingels.forEach(taak => {
+  const regel = document.createElement("div");
+  regel.textContent = taak.titel;
+  regel.style.padding = "8px 12px";
+  regel.style.marginBottom = "6px";
+  regel.style.borderRadius = "10px";
+  regel.style.background = "rgba(255,255,255,0.35)";
+
+  doedingelsLijst.appendChild(regel);
+});
  
    const vandaag = new Date().toLocaleDateString("sv-SE");
 
