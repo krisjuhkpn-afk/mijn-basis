@@ -592,6 +592,13 @@
     placeholder="Wat op papier staat, hoef je niet allemaal in je hoofd te houden."
     aria-label="Mijn Reflexel"
   ></textarea>
+  <button id="rosebud-kopieer" type="button"
+  style="display:block; margin:12px auto; padding:0;
+  border:none; background:transparent; cursor:pointer;"
+  aria-label="Kopieer Reflexel voor Rosebud">
+  <img src="rosebud.png" alt="Rosebud"
+    style="width:42px; height:42px; border-radius:10px;">
+</button>
   <div id="reflexel-geschiedenis">
   <h3>Eerdere Reflexels</h3>
   <div id="reflexel-overzicht"></div>
@@ -1124,6 +1131,23 @@ document.getElementById("reflexel-wijzigingen-opslaan")
     } catch (error) {
       alert("Opslaan is niet gelukt.");
     }
+});
+
+ // Reflexel kopiëren voor Rosebud
+document.getElementById("rosebud-kopieer").addEventListener("click", async function() {
+  const tekst = document.getElementById("reflexel-tekst").value;
+
+  if (!tekst.trim()) {
+    alert("Er staat nog geen tekst om te kopiëren.");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(tekst);
+    alert("Gekopieerd! Je kunt de tekst nu in Rosebud plakken.");
+  } catch (error) {
+    alert("Kopiëren is niet gelukt.");
+  }
 });
 
  
