@@ -1157,6 +1157,23 @@ document.getElementById("rosebud-kopieer").addEventListener("click", async funct
   }
 });
 
+ // Bewaarde Reflexel kopiëren voor Rosebud
+document.getElementById("rosebud-bewaard-kopieer")
+  .addEventListener("click", async function() {
+
+    const tekst = document.getElementById("reflexel-bewaarde-tekst").value;
+
+    if (!tekst.trim()) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(tekst);
+    } catch (error) {
+      alert("Kopiëren is niet gelukt.");
+    }
+});
+ 
  
 </script>
 
