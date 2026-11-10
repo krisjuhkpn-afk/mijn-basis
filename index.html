@@ -247,7 +247,7 @@
   width: 18px;
   height: 18px;
   margin: 0;
-  accent-color: #a83b60;
+  accent-color: #FEC1D6;
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -792,25 +792,12 @@ doedingelsLijst.innerHTML = "";
 
 doedingels.forEach(taak => {
   const regel = document.createElement("label");
-
-  regel.style.cssText = `
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    margin-bottom: 6px;
-    border: 1px solid #f1cbd9;
-    border-radius: 14px;
-    background: #fff0f6;
-    cursor: pointer;
-  `;
+ regel.className = "afspraak";
 
   const vakje = document.createElement("input");
   vakje.type = "checkbox";
-  vakje.style.width = "18px";
-  vakje.style.height = "18px";
-  vakje.style.accentColor = "#B20231";
-
+ vakje.className = "actiepunt-vinkje";
+ 
   const tekst = document.createElement("span");
   tekst.textContent = taak.titel;
 
