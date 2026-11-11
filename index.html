@@ -860,6 +860,10 @@ const taken = alleTaken.filter(taak => {
   return taak.lijst?.toLowerCase() === "openstaande actiepunten"
    && !taak.status?.toLowerCase().includes("completed")
 });
+
+  const afgerondVandaag = JSON.parse(
+  localStorage.getItem("afgeronde-priodingels-" + vandaag) || "[]"
+);
   
   document.getElementById("priodingels-teller").textContent =
   taken.length + " priodingels vandaag";
