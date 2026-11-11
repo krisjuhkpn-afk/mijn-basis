@@ -251,6 +251,10 @@
   background-color: #f7d6e2;
   cursor: pointer;
   flex-shrink: 0;
+  appearance: none;
+  background-color: #f7d6e2;
+border: 1px solid #888;
+border-radius: 3px;
 }
  @media (max-width: 600px) {
    body {
@@ -532,6 +536,31 @@
 .blauwe-dag-actief .actiepunt-vinkje {
   accent-color: #A7D8FD !important;
  background-color: #A7D8FD !important;
+}
+
+ .blauwe-dag-actief .actiepunt-vinkje {
+  background-color: #DBEEFC;
+  border-color: #4FA1E0;
+}
+
+ .actiepunt-vinkje:checked {
+  background-color: #B20231;
+  border-color: #B20231;
+}
+
+.actiepunt-vinkje:checked::after {
+  content: "✓";
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 16px;
+}
+
+.blauwe-dag-actief .actiepunt-vinkje:checked {
+  background-color: #024BAB;
+  border-color: #024BAB;
 }
  
 </style>
