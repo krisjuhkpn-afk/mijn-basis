@@ -840,12 +840,43 @@ laadAgenda();
 doedingelsLijst.innerHTML = "";
 
 doedingels.forEach(taak => {
+  const vandaag = new Date().toLocaleDateString("sv-SE");
+  const gisteren = new Date();
+  gisteren.setDate(gisteren.getDate() - 1);
+  const gisterenDatum = gisteren.toLocaleDateString("sv-SE");
+
+  if (
+    localStorage.getItem(
+      "doedingel-" + gisterenDatum + "-" + taak.id
+    ) === "true"
+  ) return;
+ 
+ if (localStorage.getItem("doedingel-afgerond-" + taak.id) === "true"
+    && localStorage.getItem("doedingel-" + vandaag + "-" + taak.id) !== "true") return;
+ 
   const regel = document.createElement("label");
  regel.className = "afspraak";
 
   const vakje = document.createElement("input");
   vakje.type = "checkbox";
  vakje.className = "actiepunt-vinkje";
+ const vandaag = new Date().toLocaleDateString("sv-SE");
+const opslagSleutel = "doedingel-" + vandaag + "-" + taak.id;
+
+vakje.checked = localStorage.getItem(opslagSleutel) === "true";
+regel.classList.toggle("voltooid", vakje.checked);
+
+vakje.addEventListener("change", () => {
+  if (vakje.checked) {
+    localStorage.setItem(opslagSleutel, "true");
+   localStorage.setItem("doedingel-afgerond-" + taak.id, "true");
+  } else {
+    localStorage.removeItem(opslagSleutel);
+   localStorage.removeItem("doedingel-afgerond-" + taak.id);
+  }
+
+  regel.classList.toggle("voltooid", vakje.checked);
+});
  
   const tekst = document.createElement("span");
  tekst.style.fontFamily = "Nunito, sans-serif";
