@@ -861,9 +861,6 @@ const taken = alleTaken.filter(taak => {
    && !taak.status?.toLowerCase().includes("completed")
 });
 
-  const afgerondVandaag = JSON.parse(
-  localStorage.getItem("afgeronde-priodingels-" + vandaag) || "[]"
-);
   
   document.getElementById("priodingels-teller").textContent =
   taken.length + " priodingels vandaag";
