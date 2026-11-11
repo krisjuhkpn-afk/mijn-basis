@@ -629,7 +629,7 @@ border-radius: 3px;
 
  <section id="reflexel-pagina" style="display:none;">
   <h2>Reflexel</h2>
-  <p style="margin-top:-4px;">Mijn hoofd op papier</p>
+  <p style="margin-top:-3px;">Mijn hoofd op papier</p>
 
   <textarea
     id="reflexel-tekst"
@@ -858,7 +858,7 @@ tekst.style.fontWeight = "400";
 
 const taken = alleTaken.filter(taak => {
   return taak.lijst?.toLowerCase() === "openstaande actiepunten"
-    && taak.datum?.slice(0, 10) === vandaag;
+   && !taak.status?.toLowerCase().includes("completed")
 });
   
   document.getElementById("priodingels-teller").textContent =
