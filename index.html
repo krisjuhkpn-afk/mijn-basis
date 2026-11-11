@@ -860,7 +860,6 @@ doedingels.forEach(taak => {
   const vakje = document.createElement("input");
   vakje.type = "checkbox";
  vakje.className = "actiepunt-vinkje";
- const vandaag = new Date().toLocaleDateString("sv-SE");
 const opslagSleutel = "doedingel-" + vandaag + "-" + taak.id;
 
 vakje.checked = localStorage.getItem(opslagSleutel) === "true";
