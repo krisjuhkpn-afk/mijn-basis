@@ -795,11 +795,7 @@ border-radius: 3px;
      style="cursor:pointer;">
   <img id="nav-reflexel" src="reflexel_roze.png" alt="Reflexel" role="button" tabindex="0">
    
-  <img id="nav-wissel"
-       src="blauw blad wisselicoon.png"
-       alt="Wissel tussen gewone en blauwe dag"
-       role="button"
-       tabindex="0">
+ 
 </nav>
  
 <script>
@@ -865,6 +861,12 @@ updateVoortgang();
  try {
    const response = await fetch('/api/agenda');
    const afspraken = await response.json();
+  const isBlauweDag = afspraken.some(afspraak =>
+  afspraak.titel?.trim().toLowerCase() === "blauwe dag"
+);
+
+localStorage.setItem(blauweDagSleutel, String(isBlauweDag));
+toonBlauweDag();
    
  
    vak.innerHTML = '';
@@ -885,8 +887,7 @@ updateVoortgang();
    console.error('Agenda kon niet worden geladen:', error);
  }
 }
- 
-laadAgenda();
+
 
  async function laadActiepunten() {
  const vak = document.getElementById("google-taken");
@@ -1100,7 +1101,6 @@ async function testBeveiligdeVerbinding() {
 // testBeveiligdeVerbinding();
 
  // Mijn Blauwe Dag
-const blauweDagIcoon = document.getElementById("nav-wissel");
 const blauweDagMelding = document.getElementById("blauwe-dag");
 
 const blauweDagSleutel =
@@ -1144,24 +1144,14 @@ basisTitel.style.color = actief ? "#024BAB" : "";
   document.getElementById("afspraken-sectie").style.display = actief ? "none" : "";
   document.getElementById("openstaande-actiepunten").style.display = actief ? "none" : "";
   document.getElementById("priodingels-teller").style.display = actief ? "none" : "";
-  blauweDagIcoon.setAttribute("aria-pressed", String(actief));
-  blauweDagIcoon.src = actief
-  ? "roze blad wisselicoon.png"
-  : "blauw blad wisselicoon.png";
+  
 
    updateVoortgang();
 }
 
-function wisselBlauweDag() {
-  const actief = localStorage.getItem(blauweDagSleutel) === "true";
-  localStorage.setItem(blauweDagSleutel, String(!actief));
-  toonBlauweDag();
-}
-
- document.getElementById("nav-wissel").addEventListener("click", wisselBlauweDag);
-
 
 toonBlauweDag();
+ laadAgenda();
 
  // Mijn Reflexel openen
 document.getElementById("nav-reflexel").addEventListener("click", function() {
