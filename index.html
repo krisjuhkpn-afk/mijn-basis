@@ -566,6 +566,37 @@ border-radius: 3px;
   background-color: #024BAB;
   border-color: #024BAB;
 }
+
+ 
+/* Mijn Weekagenda */
+#weekagenda-pagina {
+  max-width: 760px;
+  margin: 25px auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+#weekagenda-pagina h2 {
+  color: #B20231;
+  text-align: center;
+  font-size: 18px;
+}
+
+.weekagenda-dag {
+  margin-bottom: 18px;
+}
+
+.weekagenda-dag h3 {
+  color: #B20231;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.blauwe-dag-actief #weekagenda-pagina h2,
+.blauwe-dag-actief .weekagenda-dag h3 {
+  color: #024BAB;
+}
+
  
 </style>
 </head>
@@ -704,6 +735,17 @@ border-radius: 3px;
 </button>
   
 </section>
+ 
+<section id="weekagenda-pagina" style="display:none;">
+  <h2 style="text-align:center; color:#B20231; font-size:18px; margin:25px auto;">
+    Mijn Weekagenda
+  </h2>
+
+  <div id="weekagenda-inhoud"
+       style="max-width:760px; margin:0 auto;">
+  </div>
+</section>
+
  
 <section id="doedingels-pagina" style="display:none;">
   <h2 style="width:100%; text-align:center; color:#B20231; font-size:18px; margin:25px auto;">Doedingels</h2>
@@ -1108,6 +1150,42 @@ document.getElementById("nav-reflexel").addEventListener("click", function() {
     pagina.scrollIntoView({ behavior: "smooth" });
   }
 });
+
+ 
+ // Mijn Weekagenda openen en sluiten
+document.getElementById("nav-agenda").addEventListener("click", function() {
+  const weekagenda = document.getElementById("weekagenda-pagina");
+  const dagonderdelen = [
+    ".basis-titel",
+    "#voortgang",
+    ".voortgang-balk",
+    ".dashboard",
+    ".blauwe-rust-afbeelding",
+    "#afspraken-sectie",
+    "#openstaande-actiepunten",
+    "#afspraken-teller",
+    "#priodingels-teller"
+  ];
+
+  const openen = weekagenda.style.display === "none";
+
+  dagonderdelen.forEach(selector => {
+    const onderdeel = document.querySelector(selector);
+    if (onderdeel) {
+      if (openen) {
+        onderdeel.dataset.weekagendaDisplay = onderdeel.style.display;
+        onderdeel.style.display = "none";
+      } else {
+        onderdeel.style.display = onderdeel.dataset.weekagendaDisplay || "";
+      }
+    }
+  });
+
+  weekagenda.style.display = openen ? "block" : "none";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
 
 // Mijn Doedingels openen
 document.getElementById("nav-doedingels").addEventListener("click", function() {
