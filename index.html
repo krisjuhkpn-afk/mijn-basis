@@ -1174,7 +1174,10 @@ let weekagendaDatum = new Date();
 function toonWeekPeriode() {
   const maandag = new Date(weekagendaDatum);
   const dag = (maandag.getDay() + 6) % 7;
-  maandag.setDate(maandag.getDate() - dag);
+  
+maandag.setDate(maandag.getDate() - dag);
+weekagendaDatum = new Date(maandag);
+
 
   const zondag = new Date(maandag);
   zondag.setDate(maandag.getDate() + 6);
