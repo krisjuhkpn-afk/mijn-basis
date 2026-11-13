@@ -13,8 +13,8 @@ export default {
     ? "/tasks"
     : url.pathname === "/api/tasks/complete"
       : url.pathname === "/api/weekagenda"
-  ? "/weekagenda" + url.search
-  : "/";
+    ? "/weekagenda" + url.search
+    : "/";
 
       return env.AGENDA_SERVICE.fetch(
         new Request("https://internal" + endpoint, request)
