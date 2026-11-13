@@ -1194,12 +1194,16 @@ weekagendaDatum = new Date(maandag);
 document.getElementById("week-vorige").addEventListener("click", () => {
   weekagendaDatum.setDate(weekagendaDatum.getDate() - 7);
   toonWeekPeriode();
+  toonWeekdagen();
 });
 
 document.getElementById("week-volgende").addEventListener("click", () => {
   weekagendaDatum.setDate(weekagendaDatum.getDate() + 7);
   toonWeekPeriode();
+  toonWeekdagen();
 });
+ }
+ 
 
 toonWeekPeriode();
 
