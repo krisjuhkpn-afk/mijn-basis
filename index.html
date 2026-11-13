@@ -12,11 +12,57 @@
  
 <style>
  body {
+  
    margin: 0;
    padding: 0 30px 15px;
-   background: #ffffff;
+   background: #FFF0F6;
    font-family: Nunito, sans-serif;
  }
+
+ .vandagen-banner {
+  width: calc(100% + 60px);
+  max-width: none;
+  margin: 0 -30px;
+  text-align: center;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .vandagen-banner {
+    width: calc(100% + 20px);
+    margin: 0 -10px;
+  }
+}
+.vandagen-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+ #blauwe-dag-icoon {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: 0 max(0px, calc((100% - 760px) / 2)) 0 auto;
+  cursor: pointer;
+}
+ 
+ #afspraken-teller {
+  max-width: 760px;
+  margin: -35px auto 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+}
+
+ #priodingels-teller {
+  max-width: 760px;
+  margin: -10px auto 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+}
  
  h1 {
    text-align: center;
@@ -27,17 +73,43 @@
  
  .dashboard {
    display: grid;
-   grid-template-columns: repeat(4, minmax(0, 1fr));
+   grid-template-columns: repeat(5, minmax(0, 1fr));
    gap: 8px;
    max-width: 760px;
    margin: 0 auto;
+   padding: 15px;
 }
  
+ body.blauwe-dag-actief {
+  background-color: #D3EDFD;
+}
+
+.blauwe-dag-actief h1:not(.vandagen-blauw) {
+  display: none;
+}
+ 
+.blauwe-dag-actief #voortgang {
+  display: block;
+  color: #024BAB;
+  font-size: 13px;
+  text-transform: lowercase;
+}
+ 
+.blauwe-dag-actief .dashboard {
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 15px;
+  box-sizing: border-box;
+}
  .dashboard img {
    display: block;
    width: 100%;
    height: auto;
+  
  }
+ .dashboard img[src*="medicamentels.png"] {
+   transform: scale(1.00);
+}
  
  .dashboard a {
    display: block;
@@ -53,26 +125,37 @@
 }
 
  #datum {
-   text-align: left;
-   margin: 4px 0;
-   font-size: 15px;
-   font-weight: 400;
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  margin: 0;
+  text-align: left;
+  color: #FAF9F6;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+}
+ .datum-jaar {
+  color: #FAF9F6;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1;
 }
  
 #voortgang {
-   text-align: center;
-   margin: 4px 0 20px 0;
-   font-size: 16px;
-   font-weight: 600;
+  text-align: center;
+  margin: -15px 0 35px 0;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .voortgang-balk {
-   width: 100%;
-   max-width: 760px;
+   width: calc(100% - 30px);
+   max-width: 730px;
    height: 8px;
-   background: #f7e8ed;
+   background: #F8D4E2;
    border-radius: 10px;
-   margin: 0 auto 32px auto;
+   margin: -22px auto 15px auto;
    overflow: hidden;
 }
  
@@ -84,6 +167,14 @@
    transition: width 0.3s ease;
 }
 
+ .blauwe-dag-actief .voortgang-balk {
+  background: #C5E4F8;
+}
+
+.blauwe-dag-actief #voortgang-vulling {
+  background: #4FA1E0;
+}
+ 
  @media (max-width: 600px) {
    .voortgang-balk {
        margin-bottom: 18px;
@@ -92,30 +183,42 @@
 
  .afspraken {
  max-width: 760px;
- margin: 32px auto 0;
+ margin: 14px auto 0;
 }
  
 .afspraken h2,
 .basis-titel {
- color: #7a1735;
- font-size: 22px;
- margin: 0 0 14px;
- text-align: center;
- }
+  color: #B20231;
+  font-size: 18px;
+  margin: 0 0 14px;
+  text-align: center;
+}
+
+ .basis-titel {
+  color: #B20231;
+  margin-top: 45px;
+  font-size: 18px;
+}
+
+ .blauwe-dag-actief .basis-titel {
+  color: #024BAB;
+  margin-top: 20px;
+}
  
 .afspraak {
  display: flex;
  align-items: center;
  gap: 10px;
- background: #fdf2f6;
+ background: #FAE3EB;
  border: 1px solid #f3c9d8;
  border-radius: 12px;
- padding: 6px 10px;
+ padding: 3px 10px;
  margin-bottom: 8px;
+ font-size: 14px;
 }
  
 .tijd {
- background: #f7d6e2;
+ background: #F8C5D8;
  color: #7a1735;
  font-weight: 600;
  font-size: 13px;
@@ -126,7 +229,7 @@
 }
  
 .omschrijving {
- font-size: 14px;
+ font-size: 12px;
  font-weight: 400;
 }
 .afspraak.voltooid {
@@ -144,9 +247,14 @@
   width: 18px;
   height: 18px;
   margin: 0;
-  accent-color: #a83b60;
+  accent-color: #f7d6e2;
+  background-color: #f7d6e2;
   cursor: pointer;
   flex-shrink: 0;
+  appearance: none;
+  background-color: #f7d6e2;
+border: 1px solid #888;
+border-radius: 3px;
 }
  @media (max-width: 600px) {
    body {
@@ -158,17 +266,373 @@
       gap: 7px;
    }
 }
+
+ #vandaag-is-blauw {
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+}
+ .dag-keuze {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 660px;
+  margin: 5px auto 15px;
+}
+
+#vandaag-is-blauw {
+  width: 240px;
+  height: auto;
+}
+
+#blauwe-dag-icoon {
+  width: 100px;
+  height: auto;
+  cursor: pointer;
+}
+ #blauwe-dag-banner {
+  width: calc(100% + 60px);
+  max-width: none;
+  margin: 0 -30px;
+}
+
+@media (max-width: 600px) {
+  #blauwe-dag-banner {
+    width: calc(100% + 20px);
+    margin: 0 -10px;
+  }
+}
+
+#blauwe-dag-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+ .onderste-navigatie {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  width: 90%;
+  max-width: 650px;
+  margin: 30px auto;
+}
+
+.onderste-navigatie img {
+  display: block;
+  width: 17%;
+  max-width: 75px;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.onderste-navigatie #nav-agenda {
+  order: 1;
+}
+
+.onderste-navigatie #nav-doedingels {
+  order: 2;
+}
+
+.onderste-navigatie #nav-reflexel {
+  order: 3;
+}
+
+.onderste-navigatie #nav-wissel {
+  order: 4;
+  width: 22%;
+  max-width: 100px;
+  margin-left: auto;
+}
+ .blauwe-rust-afbeelding {
+  display: none;
+}
+
+.blauwe-dag-actief .blauwe-rust-afbeelding {
+  display: block;
+  width: 70%;
+  max-width: 600px;
+  margin: 35px auto 45px;
+}
+
+ .blauwe-rust-afbeelding img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.blauwe-dag-actief .vandagen-blauw-logo {
+  display: block;
+  width: 85%;
+  max-width: 500px;
+  height: auto;
+  margin: 20px auto 10px;
+ 
+}
+
+/* Mijn Reflexel */
+#reflexel-pagina {
+  max-width: 760px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #FAE3EB;
+  border-radius: 18px;
+  box-sizing: border-box;
+}
+
+#reflexel-pagina h2 {
+  color: #B20231;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+#reflexel-pagina p {
+  color: #7a1735;
+  font-size: 12px;
+  text-align: center;
+}
+
+#reflexel-tekst {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 1px solid #FC89A9;
+  border-radius: 12px;
+  background: #FFF9FC;
+  color: #956C7C;
+  font-family: Nunito, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* Reflexel op een blauwe dag */
+.blauwe-dag-actief #reflexel-pagina {
+  background: #E8F5FE;
+}
+
+.blauwe-dag-actief #reflexel-pagina h2,
+.blauwe-dag-actief #reflexel-pagina p {
+  color: #024BAB;
+}
+
+.blauwe-dag-actief #reflexel-tekst {
+  background: #F7FCFF;
+  border-color: #4FA1E0;
+  color: #024BAB;
+}
+
+ /* Eerdere Reflexels */
+#reflexel-geschiedenis {
+  margin-top: 25px;
+}
+
+#reflexel-geschiedenis h3 {
+  color: #B20231;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#reflexel-overzicht {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#reflexel-overzicht button {
+  background: #FFF9FC;
+  color: #B20231;
+  border: 1px solid #FC89A9;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-family: Nunito, sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Blauwe Dag */
+.blauwe-dag-actief #reflexel-geschiedenis h3 {
+  color: #024BAB;
+}
+
+.blauwe-dag-actief #reflexel-overzicht button {
+  background: #F7FCFF;
+  color: #024BAB;
+  border-color: #4FA1E0;
+}
+
+ /* Bewaarde Reflexel */
+#reflexel-bewaard {
+  margin-top: 25px;
+}
+
+#reflexel-bewaard h3 {
+  color: #B20231;
+  font-size: 16px;
+  text-align: center;
+}
+
+#reflexel-bewaarde-tekst {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 1px solid #FC89A9;
+  border-radius: 12px;
+  background: #FFF9FC;
+  color: #956C7C;
+  font-family: Nunito, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* Bewaarde Reflexel op een Blauwe Dag */
+.blauwe-dag-actief #reflexel-bewaard h3 {
+  color: #024BAB;
+}
+
+.blauwe-dag-actief #reflexel-bewaarde-tekst {
+  background: #F7FCFF;
+  border-color: #4FA1E0;
+  color: #024BAB;
+}
+
+ /* Reflexel knoppen op een Blauwe Dag */
+.blauwe-dag-actief #reflexel-nieuw,
+.blauwe-dag-actief #reflexel-wijzigingen-opslaan {
+  background: #024BAB !important;
+  color: white;
+}
+
+ /* Titel en ondertitel Mijn Reflexel dichter bij elkaar */
+#reflexel-pagina h2 {
+  margin-bottom: 0;
+}
+
+#reflexel-pagina p {
+  margin-top: 4px;
+}
+
+ /* Doedingels op de Blauwe Dag */
+.blauwe-dag-actief #doedingels-pagina h2 {
+  color: #024BAB !important;
+}
+
+.blauwe-dag-actief #doedingels-lijst .afspraak {
+  background: #DBEEFC !important;
+  border-color: #4FA1E0 !important;
+}
+
+.blauwe-dag-actief .actiepunt-vinkje {
+  accent-color: #A7D8FD !important;
+ background-color: #A7D8FD !important;
+}
+
+ .blauwe-dag-actief .actiepunt-vinkje {
+  background-color: #DBEEFC;
+  border-color: #4FA1E0;
+}
+
+ .actiepunt-vinkje {
+  background-color: #FFF0F6;
+}
+
+.actiepunt-vinkje:checked {
+  background-color: #A0A0A0;
+  border-color: #A0A0A0;
+}
+
+.actiepunt-vinkje:checked::after {
+  content: "✓";
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 16px;
+}
+
+.blauwe-dag-actief .actiepunt-vinkje:checked {
+  background-color: #024BAB;
+  border-color: #024BAB;
+}
+
+ 
+/* Mijn Weekagenda */
+ 
+.blauwe-dag-actief #weekagenda-pagina .afspraak {
+  background: #DBEEFC;
+  border-color: #4FA1E0;
+}
+
+ .blauwe-dag-actief #weekagenda-pagina .omschrijving {
+  color: #024BAB;
+}
+
+.blauwe-dag-actief #weekagenda-pagina .tijd {
+  background: #A7D8FD;
+  color: #024BAB;
+}
+
+#weekagenda-pagina {
+  max-width: 760px;
+  margin: 25px auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+#weekagenda-pagina h2 {
+ color: #024BAB;
+  text-align: center;
+  font-size: 18px;
+}
+
+.weekagenda-dag {
+  margin-bottom: 18px;
+}
+
+.weekagenda-dag h3 {
+  color: #B20231;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.blauwe-dag-actief #weekagenda-pagina h2,
+.blauwe-dag-actief #weekagenda-pagina #week-periode,
+.blauwe-dag-actief .weekagenda-dag h3 {
+    color: #024BAB !important;
+}
+
  
 </style>
 </head>
  
 <body>
  
- 
-<p id="datum"></p>
-<p id="blauwe-dag" style="display:none;">Vandaag is een blauwe dag</p>
-<p id="afspraken-teller"></p>
-<p id="actiepunten-teller"></p>
+<div class="vandagen-banner" id="gewone-dag-banner">
+  <img src="vandagen banner.png" alt="Vandagen">
+  <p id="datum"></p>
+</div>
+
+ <div id="blauwe-dag-banner" style="display:none;">
+  <img src="Een blauwe dag van rust.png" alt="Vandaag is een blauwe dag">
+</div>
+
+  
+<p id="blauwe-dag" style="display:none;"></p>
+<p id="afspraken-teller" style="display:none;"></p>
+<p id="actiepunten-teller" style="display:none;"></p>
+<p id="priodingels-teller" style="display:none;"></p>
  
 <h2 class="basis-titel">Dagelijkse Basis</h2>
 <p id="voortgang"></p>
@@ -196,32 +660,158 @@
 
   <a href="#"><img src="13 medicamentels.png" alt="Medicamentels"></a>
   <a href="#"><img src="14 ontspannen.png" alt="Ontspannen"></a>
-  <a href="#"><img src="15 opruimen.png" alt="Opruimen"></a>
-  <a href="#"><img src="16 medicamentels.png" alt="Medicamentels"></a>
+  <a href="#"><img src="15 medicamentels.png" alt="Medicamentels"></a>
 </div>
 
+<div class="blauwe-rust-afbeelding" style="display:none;">
+  <img src="blauwe-rust.png" alt="Rustgevend water met blauwe bladeren">
+</div>
 
-<section class="afspraken">
+<section class="afspraken" id="afspraken-sectie">
    <h2>Afspraken van de dag</h2>
  
    <div id="agenda-afspraken"></div>
 </section>
 
  <section class="afspraken" id="openstaande-actiepunten">
- <h2>Openstaande actiepunten</h2>
+ <h2>Priodingels</h2>
  <div id="google-taken">Taken worden geladen...</div>
 </section>
+
+ <section id="reflexel-pagina" style="display:none;">
+  <h2>Reflexel</h2>
+  <p style="margin-top:-3px;">Mijn hoofd op papier</p>
+
+  <textarea
+    id="reflexel-tekst"
+    rows="8"
+    placeholder="Wat op papier staat, hoef je niet allemaal in je hoofd te houden."
+    aria-label="Mijn Reflexel"
+  ></textarea>
+  <button id="rosebud-kopieer" type="button"
+  style="display:block; margin:12px auto; padding:0;
+  border:none; background:transparent; cursor:pointer;"
+  aria-label="Kopieer Reflexel voor Rosebud">
+  <img src="rosebud.png" alt="Rosebud"
+    style="width:42px; height:42px; border-radius:10px;">
+</button>
+  <div id="reflexel-geschiedenis">
+  <h3>Eerdere Reflexels</h3>
+  <div id="reflexel-overzicht"></div>
+   <div id="reflexel-bewaard" style="display:none;">
+  <h3>Mijn bewaarde Reflexel</h3>
+
+  <textarea
+    id="reflexel-bewaarde-tekst"
+    rows="8"
+    aria-label="Bewaarde Reflexel"
+  ></textarea>
+    <button id="rosebud-bewaard-kopieer" type="button"
+  style="display:block; margin:12px auto; padding:0;
+  border:none; background:transparent; cursor:pointer;"
+  aria-label="Kopieer bewaarde Reflexel voor Rosebud">
+  <img src="rosebud.png" alt="Rosebud"
+    style="width:42px; height:42px; border-radius:10px;">
+</button>
+    <button
+  id="reflexel-wijzigingen-opslaan"
+  type="button"
+  style="
+    display:block;
+    margin:15px auto;
+    padding:7px 14px;
+    background:#B20231;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-family:Nunito,sans-serif;
+    font-size:12px;
+    cursor:pointer;
+  ">
+  Wijzigingen opslaan
+</button>
+</div>
+</div>
+  <button
+  id="reflexel-nieuw"
+  type="button"
+  style="
+    display:block;
+    margin:15px auto;
+    padding:7px 14px;
+    background:#B20231;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-family:Nunito,sans-serif;
+    font-size:12px;
+    cursor:pointer;
+  ">
+  Nieuwe Reflexel
+</button>
+  
+</section>
+ 
+<section id="weekagenda-pagina" style="display:none;">
+  <h2 style="text-align:center; color:#B20231; font-size:18px; margin:25px auto;">
+    Mijn Weekagenda
+  </h2>
+
+ 
+<div class="weekagenda-navigatie"
+     style="display:flex; justify-content:space-between;
+            align-items:center; max-width:760px;
+            margin:15px auto 25px;">
+
+  <button id="week-vorige" type="button">❮</button>
+
+  <span id="week-periode"
+        style="font-size:13px; color:#B20231;">
+  </span>
+
+  <button id="week-volgende" type="button">❯</button>
+
+</div>
+
+
+  <div id="weekagenda-inhoud"
+       style="max-width:760px; margin:0 auto;">
+  </div>
+</section>
+
+ 
+<section id="doedingels-pagina" style="display:none;">
+  <h2 style="width:100%; text-align:center; color:#B20231; font-size:18px; margin:25px auto;">Doedingels</h2>
+ <div id="doedingels-lijst" style="width:100%; max-width:760px; margin:0 auto; box-sizing:border-box;"></div>
+</section>
+ 
+  <nav class="onderste-navigatie">
+  <img id="nav-agenda" src="agenda_roze.png" alt="Agenda">
+ <img id="nav-doedingels"
+     src="doedingels_roze.png"
+     alt="Doedingels"
+     role="button"
+     tabindex="0"
+     style="cursor:pointer;">
+  <img id="nav-reflexel" src="reflexel_roze.png" alt="Reflexel" role="button" tabindex="0">
+   
+ 
+</nav>
  
 <script>
 const vandaag = new Date().toLocaleDateString('en-CA');
 const opgeslagenDag = localStorage.getItem('dashboardDatum');
-document.getElementById('datum').textContent =
- new Date().toLocaleDateString('nl-NL', {
-   weekday: 'long',
-   day: 'numeric',
-   month: 'long',
-   year: 'numeric'
- });
+const nu = new Date();
+
+const dagMaand = nu.toLocaleDateString('nl-NL', {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'long'
+});
+
+document.getElementById('datum').innerHTML =
+  dagMaand + '<br><span class="datum-jaar">' +
+  nu.getFullYear() + '</span>';
  
 if (opgeslagenDag !== vandaag) {
    localStorage.removeItem('dashboardKlaar');
@@ -233,7 +823,9 @@ const iconen = document.querySelectorAll('.dashboard a');
  function updateVoortgang() {
  const aantalKlaar = document.querySelectorAll('.dashboard a.done').length;
  document.getElementById('voortgang').textContent =
-   aantalKlaar + ' van ' + iconen.length + ' gedaan';
+  document.body.classList.contains('blauwe-dag-actief')
+    ? 'vandaag mag minder'
+    : aantalKlaar + ' van ' + iconen.length + ' gedaan';
   const percentage = (aantalKlaar / iconen.length) * 100;
 document.getElementById('voortgang-vulling').style.width = percentage + '%';
 }
@@ -267,15 +859,15 @@ updateVoortgang();
  const vak = document.getElementById('agenda-afspraken');
  
  try {
-   const response = await fetch('https://krisjuh-agenda.krisjuh.workers.dev/');
+   const response = await fetch('/api/agenda');
    const afspraken = await response.json();
-   const afsprakenTeller = document.getElementById('afspraken-teller');
- 
-if (afspraken.length === 1) {
-   afsprakenTeller.textContent = '1 afspraak vandaag';
-} else {
-   afsprakenTeller.textContent = afspraken.length + ' afspraken vandaag';
-}
+  const isBlauweDag = afspraken.some(afspraak =>
+  afspraak.titel?.trim().toLowerCase() === "blauwe dag"
+);
+
+localStorage.setItem(blauweDagSleutel, String(isBlauweDag));
+toonBlauweDag();
+   
  
    vak.innerHTML = '';
  
@@ -295,32 +887,90 @@ if (afspraken.length === 1) {
    console.error('Agenda kon niet worden geladen:', error);
  }
 }
- 
-laadAgenda();
+
 
  async function laadActiepunten() {
  const vak = document.getElementById("google-taken");
  
  try {
-   const response = await fetch(
-     "https://krisjuh-agenda.krisjuh.workers.dev/tasks"
-   );
+   const response = await fetch('/api/tasks');
  
    if (!response.ok) {
      throw new Error("Actiepunten ophalen mislukt");
    }
  
    const alleTaken = await response.json();
+
+  const doedingels = alleTaken.filter(taak =>
+  taak.lijst?.toLowerCase() === "mijn taken"
+  );
+
+  const doedingelsLijst = document.getElementById("doedingels-lijst");
+
+doedingelsLijst.innerHTML = "";
+
+doedingels.forEach(taak => {
+  const vandaag = new Date().toLocaleDateString("sv-SE");
+  const gisteren = new Date();
+  gisteren.setDate(gisteren.getDate() - 1);
+  const gisterenDatum = gisteren.toLocaleDateString("sv-SE");
+
+  if (
+    localStorage.getItem(
+      "doedingel-" + gisterenDatum + "-" + taak.id
+    ) === "true"
+  ) return;
  
-   const taken = alleTaken.filter(
-     taak => taak.lijst === "Openstaande Actiepunten"
-   );
+ if (localStorage.getItem("doedingel-afgerond-" + taak.id) === "true"
+    && localStorage.getItem("doedingel-" + vandaag + "-" + taak.id) !== "true") return;
+ 
+  const regel = document.createElement("label");
+ regel.className = "afspraak";
+
+  const vakje = document.createElement("input");
+  vakje.type = "checkbox";
+ vakje.className = "actiepunt-vinkje";
+const opslagSleutel = "doedingel-" + vandaag + "-" + taak.id;
+
+vakje.checked = localStorage.getItem(opslagSleutel) === "true";
+regel.classList.toggle("voltooid", vakje.checked);
+
+vakje.addEventListener("change", () => {
+  if (vakje.checked) {
+    localStorage.setItem(opslagSleutel, "true");
+   localStorage.setItem("doedingel-afgerond-" + taak.id, "true");
+  } else {
+    localStorage.removeItem(opslagSleutel);
+   localStorage.removeItem("doedingel-afgerond-" + taak.id);
+  }
+
+  regel.classList.toggle("voltooid", vakje.checked);
+});
+ 
+  const tekst = document.createElement("span");
+ tekst.style.fontFamily = "Nunito, sans-serif";
+tekst.style.fontSize = "12px";
+tekst.style.fontWeight = "400";
+  tekst.textContent = taak.titel;
+
+  regel.appendChild(vakje);
+  regel.appendChild(tekst);
+  doedingelsLijst.appendChild(regel);
+});
+ 
+   const vandaag = new Date().toLocaleDateString("sv-SE");
+
+const taken = alleTaken.filter(taak => {
+  return taak.lijst?.toLowerCase() === "openstaande actiepunten"
+   && !taak.status?.toLowerCase().includes("completed")
+});
+
  
    vak.innerHTML = "";
  
    if (taken.length === 0) {
-     vak.textContent = "Geen openstaande actiepunten";
-     return;
+  vak.textContent = "";
+    
    }
  
    taken.forEach(taak => {
@@ -337,11 +987,61 @@ regel.appendChild(vinkje);
 const opslagSleutel = "actiepunt-" + vandaag + "-" + taak.id;
 
 vinkje.checked = localStorage.getItem(opslagSleutel) === "true";
-regel.classList.toggle("voltooid", vinkje.checked);
+   regel.classList.toggle("voltooid", vinkje.checked);
 
-vinkje.addEventListener("change", () => {
-  regel.classList.toggle("voltooid", vinkje.checked);
-  localStorage.setItem(opslagSleutel, String(vinkje.checked));
+vinkje.addEventListener("change", async () => {
+  const voltooid = vinkje.checked;
+
+  regel.classList.toggle("voltooid", voltooid);
+
+  if (!voltooid) {
+    localStorage.removeItem(opslagSleutel);
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/tasks/complete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: taak.id,
+        lijstId: taak.lijstId
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Voltooien mislukt");
+    }
+
+    localStorage.setItem(opslagSleutel, "true");
+   const bewaardeTaken = JSON.parse(
+  localStorage.getItem("afgeronde-priodingels-" + vandaag) || "[]"
+);
+
+if (!bewaardeTaken.some(item => item.id === taak.id)) {
+  bewaardeTaken.push({
+    id: taak.id,
+    titel: taak.titel
+  });
+}
+
+localStorage.setItem(
+  "afgeronde-priodingels-" + vandaag,
+  JSON.stringify(bewaardeTaken)
+);
+   const teller = document.getElementById("priodingels-teller");
+const huidigAantal = Number(teller.textContent.match(/^\d+/)?.[0] || 0);
+teller.textContent = Math.max(0, huidigAantal - 1) + " priodingels vandaag";
+
+  } catch (error) {
+    vinkje.checked = false;
+    regel.classList.remove("voltooid");
+    localStorage.removeItem(opslagSleutel);
+    alert("Het actiepunt kon niet worden voltooid.");
+    console.error(error);
+  }
 });
     
      const titel = document.createElement("span");
@@ -351,7 +1051,34 @@ vinkje.addEventListener("change", () => {
      regel.appendChild(titel);
      vak.appendChild(regel);
    });
- 
+
+  const vandaagDatum = new Date().toLocaleDateString("sv-SE");
+
+const afgerondeTaken = JSON.parse(
+  localStorage.getItem("afgeronde-priodingels-" + vandaagDatum) || "[]"
+);
+
+afgerondeTaken.forEach(taak => {
+  if (taken.some(openTaak => openTaak.id === taak.id)) return;
+
+  const regel = document.createElement("div");
+  regel.className = "afspraak voltooid";
+
+  const vinkje = document.createElement("input");
+  vinkje.type = "checkbox";
+  vinkje.className = "actiepunt-vinkje";
+  vinkje.checked = true;
+  vinkje.disabled = true;
+
+  const titel = document.createElement("span");
+  titel.className = "omschrijving";
+  titel.textContent = taak.titel;
+
+  regel.appendChild(vinkje);
+  regel.appendChild(titel);
+  vak.appendChild(regel);
+});
+  
  } catch (error) {
    vak.textContent = "Actiepunten konden niet worden geladen";
    console.error(error);
@@ -363,13 +1090,7 @@ laadActiepunten();
  
 async function testBeveiligdeVerbinding() {
   try {
-    const response = await fetch(
-      "https://krisjuh-agenda-test.krisjuh.workers.dev/",
-      {
-        method: "GET",
-        credentials: "include"
-      }
-    );
+    const response = await fetch('/api/agenda');
 
     console.log("Cloudflare test:", response.status);
   } catch (error) {
@@ -379,7 +1100,417 @@ async function testBeveiligdeVerbinding() {
 
 // testBeveiligdeVerbinding();
 
+ // Mijn Blauwe Dag
+const blauweDagMelding = document.getElementById("blauwe-dag");
+
+const blauweDagSleutel =
+  "blauwe-dag-" + new Date().toLocaleDateString("sv-SE");
+
+function toonBlauweDag() {
+  const actief = localStorage.getItem(blauweDagSleutel) === "true";
+  document.body.classList.toggle("blauwe-dag-actief", actief);
+ document.querySelector(".blauwe-rust-afbeelding").style.display =
+  actief ? "block" : "none";
+ document.querySelectorAll(".dashboard img").forEach(img => {
+  const rozeBestand = img.getAttribute("src").replace(/ blauw(?=\.png$)/, "");
+  const blauwBestand = rozeBestand.replace(/\.png$/, " blauw.png");
+
+  img.src = actief ? blauwBestand : rozeBestand;
+});
+ document.getElementById("nav-agenda").src = actief
+  ? "agenda_blauw.png"
+  : "agenda_roze.png";
+
+document.getElementById("nav-doedingels").src = actief
+  ? "doedingels_blauw.png"
+  : "doedingels_roze.png";
+
+document.getElementById("nav-reflexel").src = actief
+  ? "reflexel_blauw.png"
+  : "reflexel_roze.png";
+  document.getElementById("gewone-dag-banner").style.display = actief ? "none" : "";
+  document.getElementById("blauwe-dag-banner").style.display = actief ? "block" : "none";
+
+ const basisTitel = document.querySelector(".basis-titel");
+
+basisTitel.textContent = actief
+  ? "Dagelijkse Basis"
+  : "Dagelijkse Basis";
+
+basisTitel.style.color = actief ? "#024BAB" : "";
+ 
+  blauweDagMelding.style.display = actief ? "block" : "none";
+  document.getElementById("afspraken-teller").style.display = actief ? "none" : "";
+  document.getElementById("afspraken-sectie").style.display = actief ? "none" : "";
+  document.getElementById("openstaande-actiepunten").style.display = actief ? "none" : "";
+  document.getElementById("priodingels-teller").style.display = actief ? "none" : "";
+  
+
+   updateVoortgang();
+}
+
+
+toonBlauweDag();
+ laadAgenda();
+
+ // Mijn Reflexel openen
+document.getElementById("nav-reflexel").addEventListener("click", function() {
+  const pagina = document.getElementById("reflexel-pagina");
+
+  pagina.style.display =
+    pagina.style.display === "none" ? "block" : "none";
+
+  if (pagina.style.display === "block") {
+    pagina.scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+ 
+let weekagendaDatum = new Date();
+
+function toonWeekPeriode() {
+  const maandag = new Date(weekagendaDatum);
+  const dag = (maandag.getDay() + 6) % 7;
+  
+maandag.setDate(maandag.getDate() - dag);
+weekagendaDatum = new Date(maandag);
+
+
+  const zondag = new Date(maandag);
+  zondag.setDate(maandag.getDate() + 6);
+
+  const formaat = { day: "numeric", month: "long" };
+
+  document.getElementById("week-periode").textContent =
+    maandag.toLocaleDateString("nl-NL", formaat) +
+    " – " +
+    zondag.toLocaleDateString("nl-NL", formaat) +
+    " " + zondag.getFullYear();
+}
+
+document.getElementById("week-vorige").addEventListener("click", () => {
+  weekagendaDatum.setDate(weekagendaDatum.getDate() - 7);
+  toonWeekPeriode();
+  toonWeekdagen();
+});
+
+document.getElementById("week-volgende").addEventListener("click", () => {
+  weekagendaDatum.setDate(weekagendaDatum.getDate() + 7);
+  toonWeekPeriode();
+  toonWeekdagen();
+});
+ 
+
+toonWeekPeriode();
+
+ 
+
+async function toonWeekdagen() {
+  const inhoud = document.getElementById("weekagenda-inhoud");
+  inhoud.innerHTML = "Afspraken worden geladen...";
+
+  const maandag = new Date(weekagendaDatum);
+  maandag.setDate(maandag.getDate() - ((maandag.getDay() + 6) % 7));
+
+  const datumSleutel = datum =>
+    datum.getFullYear() + "-" +
+    String(datum.getMonth() + 1).padStart(2, "0") + "-" +
+    String(datum.getDate()).padStart(2, "0");
+
+  try {
+    const response = await fetch(
+      "/api/weekagenda?datum=" + datumSleutel(maandag)
+    );
+
+    if (!response.ok) throw new Error("Weekagenda ophalen mislukt");
+
+    const afspraken = await response.json();
+    inhoud.innerHTML = "";
+
+    for (let i = 0; i < 7; i++) {
+      const datum = new Date(maandag);
+      datum.setDate(maandag.getDate() + i);
+
+      const dag = document.createElement("div");
+      dag.className = "weekagenda-dag";
+
+      const titel = document.createElement("h3");
+      titel.textContent = datum.toLocaleDateString("nl-NL", {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+      });
+
+      dag.appendChild(titel);
+
+      const dagAfspraken = afspraken.filter(
+        afspraak => afspraak.datum === datumSleutel(datum)
+      );
+
+      dagAfspraken.forEach(afspraak => {
+        const regel = document.createElement("div");
+        regel.className = "afspraak";
+
+        const tijd = document.createElement("span");
+        tijd.className = "tijd";
+        tijd.textContent = afspraak.tijd;
+
+        const omschrijving = document.createElement("span");
+        omschrijving.className = "omschrijving";
+        omschrijving.textContent = afspraak.titel;
+
+        regel.appendChild(tijd);
+        regel.appendChild(omschrijving);
+        dag.appendChild(regel);
+      });
+
+      inhoud.appendChild(dag);
+    }
+  } catch (error) {
+    inhoud.textContent = "De weekagenda kon niet worden geladen.";
+    console.error(error);
+  }
+}
+
+
+toonWeekdagen();
+
+ 
+ // Mijn Weekagenda openen en sluiten
+document.getElementById("nav-agenda").addEventListener("click", function() {
+  const weekagenda = document.getElementById("weekagenda-pagina");
+  const dagonderdelen = [
+    ".basis-titel",
+    "#voortgang",
+    ".voortgang-balk",
+    ".dashboard",
+    ".blauwe-rust-afbeelding",
+    "#afspraken-sectie",
+    "#openstaande-actiepunten",
+    "#afspraken-teller",
+    "#priodingels-teller"
+  ];
+
+  const openen = weekagenda.style.display === "none";
+
+  dagonderdelen.forEach(selector => {
+    const onderdeel = document.querySelector(selector);
+    if (onderdeel) {
+      if (openen) {
+        onderdeel.dataset.weekagendaDisplay = onderdeel.style.display;
+        onderdeel.style.display = "none";
+      } else {
+        onderdeel.style.display = onderdeel.dataset.weekagendaDisplay || "";
+      }
+    }
+  });
+
+  weekagenda.style.display = openen ? "block" : "none";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+
+// Mijn Doedingels openen
+document.getElementById("nav-doedingels").addEventListener("click", function() {
+  const pagina = document.getElementById("doedingels-pagina");
+
+  pagina.style.display =
+    pagina.style.display === "none" ? "block" : "none";
+
+  if (pagina.style.display === "block") {
+    pagina.scrollIntoView({ behavior: "smooth" });
+  }
+});
+ 
+// Overzicht van bewaarde Reflexels
+function toonReflexelGeschiedenis() {
+  const overzicht = document.getElementById("reflexel-overzicht");
+  overzicht.innerHTML = "";
+
+  const reflexels = JSON.parse(
+    localStorage.getItem("vandagen-reflexels") || "[]"
+  );
+
+  reflexels.slice().reverse().forEach(reflexel => {
+    const knop = document.createElement("button");
+    const [jaar, maand, dag] = reflexel.datum.split("-");
+
+    knop.type = "button";
+    knop.textContent = `${dag}-${maand}-${jaar}`;
+
+    knop.addEventListener("click", function() {
+  const bewaardVak = document.getElementById("reflexel-bewaard");
+  const bewaardeTekst = document.getElementById("reflexel-bewaarde-tekst");
+
+  const actueleReflexels = JSON.parse(
+  localStorage.getItem("vandagen-reflexels") || "[]"
+);
+const actueleReflexel = actueleReflexels.find(
+  item => item.id === reflexel.id
+);
+bewaardeTekst.value = actueleReflexel
+  ? actueleReflexel.tekst
+  : reflexel.tekst;
+     bewaardVak.dataset.reflexelId = reflexel.id;
+  bewaardVak.style.display = "block";
+
+  bewaardVak.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+
+    overzicht.appendChild(knop);
+  });
+}
+
+toonReflexelGeschiedenis();
+ // Mijn actieve Reflexel
+const reflexelTekst = document.getElementById("reflexel-tekst");
+const actieveReflexelSleutel = "vandagen-actieve-reflexel";
+
+// Bestaande Reflexel terughalen
+let actieveReflexel;
+
+try {
+  actieveReflexel = JSON.parse(
+    localStorage.getItem(actieveReflexelSleutel) || "null"
+  );
+} catch (error) {
+  actieveReflexel = null;
+}
+
+// Eerder geschreven tekst tonen
+if (actieveReflexel) {
+  reflexelTekst.value = actieveReflexel.tekst;
+}
+
+// Automatisch bewaren tijdens het schrijven
+reflexelTekst.addEventListener("input", function() {
+  const tekst = reflexelTekst.value;
+
+  // Pas een datum vastleggen zodra je iets schrijft
+  if (!actieveReflexel && tekst.trim()) {
+    actieveReflexel = {
+      id: Date.now(),
+      datum: new Date().toLocaleDateString("sv-SE"),
+      tekst: ""
+    };
+  }
+
+  if (actieveReflexel) {
+    actieveReflexel.tekst = tekst;
+
+    localStorage.setItem(
+      actieveReflexelSleutel,
+      JSON.stringify(actieveReflexel)
+    );
+  }
+});
+
+ // Huidige Reflexel afronden en een nieuwe beginnen
+document.getElementById("reflexel-nieuw").addEventListener("click", function() {
+  const tekst = reflexelTekst.value.trim();
+
+  // Geen tekst? Dan hoeft er niets bewaard te worden.
+ if (!tekst) {
+  document.getElementById("reflexel-bewaard").style.display = "none";
+  return;
+}
+
+  const reflexels = JSON.parse(
+    localStorage.getItem("vandagen-reflexels") || "[]"
+  );
+
+  reflexels.push({
+    id: actieveReflexel.id,
+    datum: actieveReflexel.datum,
+    tekst: tekst
+  });
+
+  try {
+    localStorage.setItem("vandagen-reflexels", JSON.stringify(reflexels));
+    localStorage.removeItem(actieveReflexelSleutel);
+
+    actieveReflexel = null;
+    reflexelTekst.value = "";
+   document.getElementById("reflexel-bewaard").style.display = "none";
+   toonReflexelGeschiedenis();
+
+  } catch (error) {
+    alert("Bewaren is niet gelukt. Je tekst blijft staan.");
+  }
+});
+
+ // Wijzigingen in een bewaarde Reflexel opslaan
+document.getElementById("reflexel-wijzigingen-opslaan")
+  .addEventListener("click", function() {
+
+    const bewaardVak = document.getElementById("reflexel-bewaard");
+    const id = bewaardVak.dataset.reflexelId;
+    const tekst = document.getElementById("reflexel-bewaarde-tekst").value;
+
+    if (!id) return;
+
+    const reflexels = JSON.parse(
+      localStorage.getItem("vandagen-reflexels") || "[]"
+    );
+
+    const reflexel = reflexels.find(item => String(item.id) === id);
+
+    if (!reflexel) {
+      alert("Deze Reflexel kon niet worden gevonden.");
+      return;
+    }
+
+    reflexel.tekst = tekst;
+
+    try {
+      localStorage.setItem("vandagen-reflexels", JSON.stringify(reflexels));
+    } catch (error) {
+      alert("Opslaan is niet gelukt.");
+    }
+});
+
+ // Reflexel kopiëren voor Rosebud
+document.getElementById("rosebud-kopieer").addEventListener("click", async function() {
+  const tekst = document.getElementById("reflexel-tekst").value;
+
+  if (!tekst.trim()) {
+    alert("Er staat nog geen tekst om te kopiëren.");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(tekst);
+    
+  } catch (error) {
+    alert("Kopiëren is niet gelukt.");
+  }
+});
+
+ // Bewaarde Reflexel kopiëren voor Rosebud
+document.getElementById("rosebud-bewaard-kopieer")
+  .addEventListener("click", async function() {
+
+    const tekst = document.getElementById("reflexel-bewaarde-tekst").value;
+
+    if (!tekst.trim()) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(tekst);
+    } catch (error) {
+      alert("Kopiëren is niet gelukt.");
+    }
+});
+ 
+ 
 </script>
+
+
  
 </body>
 </html>
