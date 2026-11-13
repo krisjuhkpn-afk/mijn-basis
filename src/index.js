@@ -10,11 +10,12 @@ export default {
   url.pathname === "/api/tasks/complete"
 ) {
   const endpoint = url.pathname === "/api/tasks"
-    ? "/tasks"
-    : url.pathname === "/api/tasks/complete"
-      : url.pathname === "/api/weekagenda"
-    ? "/weekagenda" + url.search
-    : "/";
+  ? "/tasks"
+  : url.pathname === "/api/tasks/complete"
+  ? "/tasks/complete"
+  : url.pathname === "/api/weekagenda"
+  ? "/weekagenda" + url.search
+  : "/";
 
       return env.AGENDA_SERVICE.fetch(
         new Request("https://internal" + endpoint, request)
