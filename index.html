@@ -865,13 +865,7 @@ updateVoortgang();
  try {
    const response = await fetch('/api/agenda');
    const afspraken = await response.json();
-   const afsprakenTeller = document.getElementById('afspraken-teller');
- 
-if (afspraken.length === 1) {
-   afsprakenTeller.textContent = '1 afspraak vandaag';
-} else {
-   afsprakenTeller.textContent = afspraken.length + ' afspraken vandaag';
-}
+   
  
    vak.innerHTML = '';
  
@@ -970,9 +964,6 @@ const taken = alleTaken.filter(taak => {
    && !taak.status?.toLowerCase().includes("completed")
 });
 
-  
-  document.getElementById("priodingels-teller").textContent =
-  taken.length + " priodingels vandaag";
  
    vak.innerHTML = "";
  
