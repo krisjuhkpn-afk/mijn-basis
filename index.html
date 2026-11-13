@@ -1201,6 +1201,35 @@ document.getElementById("week-volgende").addEventListener("click", () => {
 toonWeekPeriode();
 
  
+function toonWeekdagen() {
+  const inhoud = document.getElementById("weekagenda-inhoud");
+  inhoud.innerHTML = "";
+
+  const maandag = new Date(weekagendaDatum);
+  maandag.setDate(maandag.getDate() - ((maandag.getDay() + 6) % 7));
+
+  for (let i = 0; i < 7; i++) {
+    const datum = new Date(maandag);
+    datum.setDate(maandag.getDate() + i);
+
+    const dag = document.createElement("div");
+    dag.className = "weekagenda-dag";
+
+    const titel = document.createElement("h3");
+    titel.textContent = datum.toLocaleDateString("nl-NL", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    });
+
+    dag.appendChild(titel);
+    inhoud.appendChild(dag);
+  }
+}
+
+toonWeekdagen();
+
+ 
  // Mijn Weekagenda openen en sluiten
 document.getElementById("nav-agenda").addEventListener("click", function() {
   const weekagenda = document.getElementById("weekagenda-pagina");
