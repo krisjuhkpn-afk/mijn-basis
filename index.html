@@ -741,6 +741,23 @@ border-radius: 3px;
     Mijn Weekagenda
   </h2>
 
+ 
+<div class="weekagenda-navigatie"
+     style="display:flex; justify-content:space-between;
+            align-items:center; max-width:760px;
+            margin:15px auto 25px;">
+
+  <button id="week-vorige" type="button">❮</button>
+
+  <span id="week-periode"
+        style="font-size:13px; color:#B20231;">
+  </span>
+
+  <button id="week-volgende" type="button">❯</button>
+
+</div>
+
+
   <div id="weekagenda-inhoud"
        style="max-width:760px; margin:0 auto;">
   </div>
@@ -1150,6 +1167,38 @@ document.getElementById("nav-reflexel").addEventListener("click", function() {
     pagina.scrollIntoView({ behavior: "smooth" });
   }
 });
+
+ 
+let weekagendaDatum = new Date();
+
+function toonWeekPeriode() {
+  const maandag = new Date(weekagendaDatum);
+  const dag = (maandag.getDay() + 6) % 7;
+  maandag.setDate(maandag.getDate() - dag);
+
+  const zondag = new Date(maandag);
+  zondag.setDate(maandag.getDate() + 6);
+
+  const formaat = { day: "numeric", month: "long" };
+
+  document.getElementById("week-periode").textContent =
+    maandag.toLocaleDateString("nl-NL", formaat) +
+    " – " +
+    zondag.toLocaleDateString("nl-NL", formaat) +
+    " " + zondag.getFullYear();
+}
+
+document.getElementById("week-vorige").addEventListener("click", () => {
+  weekagendaDatum.setDate(weekagendaDatum.getDate() - 7);
+  toonWeekPeriode();
+});
+
+document.getElementById("week-volgende").addEventListener("click", () => {
+  weekagendaDatum.setDate(weekagendaDatum.getDate() + 7);
+  toonWeekPeriode();
+});
+
+toonWeekPeriode();
 
  
  // Mijn Weekagenda openen en sluiten
