@@ -1201,31 +1201,74 @@ document.getElementById("week-volgende").addEventListener("click", () => {
 toonWeekPeriode();
 
  
-function toonWeekdagen() {
+
+async function toonWeekdagen() {
   const inhoud = document.getElementById("weekagenda-inhoud");
-  inhoud.innerHTML = "";
+  inhoud.innerHTML = "Afspraken worden geladen...";
 
   const maandag = new Date(weekagendaDatum);
   maandag.setDate(maandag.getDate() - ((maandag.getDay() + 6) % 7));
 
-  for (let i = 0; i < 7; i++) {
-    const datum = new Date(maandag);
-    datum.setDate(maandag.getDate() + i);
+  const datumSleutel = datum =>
+    datum.getFullYear() + "-" +
+    String(datum.getMonth() + 1).padStart(2, "0") + "-" +
+    String(datum.getDate()).padStart(2, "0");
 
-    const dag = document.createElement("div");
-    dag.className = "weekagenda-dag";
+  try {
+    const response = await fetch(
+      "/api/weekagenda?datum=" + datumSleutel(maandag)
+    );
 
-    const titel = document.createElement("h3");
-    titel.textContent = datum.toLocaleDateString("nl-NL", {
-      weekday: "long",
-      day: "numeric",
-      month: "long"
-    });
+    if (!response.ok) throw new Error("Weekagenda ophalen mislukt");
 
-    dag.appendChild(titel);
-    inhoud.appendChild(dag);
+    const afspraken = await response.json();
+    inhoud.innerHTML = "";
+
+    for (let i = 0; i < 7; i++) {
+      const datum = new Date(maandag);
+      datum.setDate(maandag.getDate() + i);
+
+      const dag = document.createElement("div");
+      dag.className = "weekagenda-dag";
+
+      const titel = document.createElement("h3");
+      titel.textContent = datum.toLocaleDateString("nl-NL", {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+      });
+
+      dag.appendChild(titel);
+
+      const dagAfspraken = afspraken.filter(
+        afspraak => afspraak.datum === datumSleutel(datum)
+      );
+
+      dagAfspraken.forEach(afspraak => {
+        const regel = document.createElement("div");
+        regel.className = "afspraak";
+
+        const tijd = document.createElement("span");
+        tijd.className = "tijd";
+        tijd.textContent = afspraak.tijd;
+
+        const omschrijving = document.createElement("span");
+        omschrijving.className = "omschrijving";
+        omschrijving.textContent = afspraak.titel;
+
+        regel.appendChild(tijd);
+        regel.appendChild(omschrijving);
+        dag.appendChild(regel);
+      });
+
+      inhoud.appendChild(dag);
+    }
+  } catch (error) {
+    inhoud.textContent = "De weekagenda kon niet worden geladen.";
+    console.error(error);
   }
 }
+
 
 toonWeekdagen();
 
