@@ -5,6 +5,7 @@ export default {
 
     if (
   url.pathname === "/api/agenda" ||
+      url.pathname === "/api/weekagenda" ||
   url.pathname === "/api/tasks" ||
   url.pathname === "/api/tasks/complete"
 ) {
