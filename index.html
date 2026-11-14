@@ -679,6 +679,11 @@ border-radius: 3px;
 </section>
 
  <section id="reflexel-pagina" style="display:none;">
+  <input
+  type="date"
+  id="reflexel-datum"
+  style="display:block; margin:10px auto;"
+>
   <h2>Reflexel</h2>
   <p style="margin-top:-3px;">Mijn hoofd op papier</p>
 
@@ -1425,7 +1430,7 @@ document.getElementById("reflexel-nieuw").addEventListener("click", function() {
 
   reflexels.push({
     id: actieveReflexel.id,
-    datum: actieveReflexel.datum,
+    datum: document.getElementById("reflexel-datum").value || actieveReflexel.datum,
     tekst: tekst
   });
 
@@ -1437,6 +1442,7 @@ document.getElementById("reflexel-nieuw").addEventListener("click", function() {
     reflexelTekst.value = "";
    document.getElementById("reflexel-bewaard").style.display = "none";
    toonReflexelGeschiedenis();
+   document.getElementById("reflexel-datum").value = "";
 
   } catch (error) {
     alert("Bewaren is niet gelukt. Je tekst blijft staan.");
