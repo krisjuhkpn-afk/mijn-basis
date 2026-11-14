@@ -8,7 +8,7 @@
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#7a1735",
+  "theme_color": "#FFF0F6",
   "icons": [
     {
       "src": "./vandagen-icon-192.png",
