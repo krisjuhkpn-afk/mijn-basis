@@ -1399,14 +1399,26 @@ reflexelTekst.addEventListener("input", function() {
   if (!actieveReflexel && tekst.trim()) {
     actieveReflexel = {
       id: Date.now(),
-      datum: new Date().toLocaleDateString("sv-SE"),
+      datum: document.getElementById("reflexel-datum").value || new Date().toLocaleDateString("sv-SE"),
       tekst: ""
     };
   }
 
   if (actieveReflexel) {
-    actieveReflexel.tekst = tekst;
+  reflexelTekst.value = actieveReflexel.tekst;
+ 
+}
 
+    localStorage.setItem(
+      actieveReflexelSleutel,
+      JSON.stringify(actieveReflexel)
+    );
+  }
+});
+
+ document.getElementById("reflexel-datum").addEventListener("change", function() {
+  if (actieveReflexel) {
+    actieveReflexel.datum = this.value;
     localStorage.setItem(
       actieveReflexelSleutel,
       JSON.stringify(actieveReflexel)
@@ -1430,7 +1442,7 @@ document.getElementById("reflexel-nieuw").addEventListener("click", function() {
 
   reflexels.push({
     id: actieveReflexel.id,
-    datum: document.getElementById("reflexel-datum").value || actieveReflexel.datum,
+    ddatum: actieveReflexel.datum,
     tekst: tekst
   });
 
