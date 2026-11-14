@@ -1404,10 +1404,8 @@ reflexelTekst.addEventListener("input", function() {
     };
   }
 
-  if (actieveReflexel) {
-  reflexelTekst.value = actieveReflexel.tekst;
- 
-}
+    if (actieveReflexel) {
+    actieveReflexel.tekst = tekst;
 
     localStorage.setItem(
       actieveReflexelSleutel,
@@ -1442,7 +1440,7 @@ document.getElementById("reflexel-nieuw").addEventListener("click", function() {
 
   reflexels.push({
     id: actieveReflexel.id,
-    ddatum: actieveReflexel.datum,
+    datum: actieveReflexel.datum,
     tekst: tekst
   });
 
