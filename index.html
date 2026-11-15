@@ -613,6 +613,13 @@ border-radius: 3px;
     color: #024BAB !important;
 }
 
+ .psoriasis-titel {
+  text-align: center;
+  color: #B20231;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 20px 0 10px;
+}
  
 /* Mijn Psoriasisverzorging */
 .psoriasis-balk {
@@ -627,8 +634,8 @@ border-radius: 3px;
 }
 
 .psoriasis-balk > img {
-  width: 115px;
-  height: 115px;
+  width: 145px;
+  height: 85px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -648,12 +655,12 @@ border-radius: 3px;
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 18px;
+  font-size: 13px;
 }
 
 .psoriasis-status img {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   object-fit: contain;
 }
 
@@ -668,6 +675,23 @@ border-radius: 3px;
   cursor: pointer;
  flex-shrink: 0;
 max-width: 85px;
+ width: 48px;
+height: 48px;
+min-width: 48px;
+max-width: 48px;
+padding: 0;
+border-radius: 50%;
+font-size: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+ #psoriasis-status-knop::before {
+  content: "✎";
+  font-size: 26px;
+  line-height: 1;
+  color: #B20231;
 }
 
 /* Blauwe dag */
@@ -684,6 +708,10 @@ body.blauwe-dag-actief #psoriasis-status-knop {
   background: #EAF6FF;
   color: #024BAB;
   border-color: #4FA1E0;
+}
+
+ body.blauwe-dag-actief #psoriasis-status-knop::before {
+  color: #024BAB;
 }
 
  
@@ -737,13 +765,13 @@ body.blauwe-dag-actief #psoriasis-status-knop {
 </div>
 
  
-
+<h2 class="psoriasis-titel">Mijn Psoriasisverzorging</h2>
+ 
 <div class="psoriasis-balk">
   <img src="psoriasis-verzorging.png" alt="Mijn psoriasisverzorging">
 
   <div class="psoriasis-inhoud">
-    <strong>Mijn Psoriasisverzorging</strong>
-
+   
     <div class="psoriasis-status">
       <img id="psoriasis-status-icoon"
            src="psoriasis-rustig.png"
