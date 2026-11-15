@@ -614,6 +614,75 @@ border-radius: 3px;
 }
 
  
+/* Mijn Psoriasisverzorging */
+.psoriasis-balk {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+  padding: 12px;
+  background: #FEC1D6;
+  border: 1px solid #FC89A9;
+  border-radius: 16px;
+}
+
+.psoriasis-balk > img {
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.psoriasis-inhoud {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  color: #B20231;
+  font-size: 14px;
+}
+
+.psoriasis-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.psoriasis-status img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+#psoriasis-status-knop {
+  background: #FFF0F6;
+  color: #B20231;
+  border: 1px solid #FC89A9;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Blauwe dag */
+body.blauwe-dag-actief .psoriasis-balk {
+  background: #DBEEFC;
+  border-color: #4FA1E0;
+}
+
+body.blauwe-dag-actief .psoriasis-inhoud {
+  color: #024BAB;
+}
+
+body.blauwe-dag-actief #psoriasis-status-knop {
+  background: #EAF6FF;
+  color: #024BAB;
+  border-color: #4FA1E0;
+}
+
+ 
 </style>
 </head>
  
@@ -662,6 +731,27 @@ border-radius: 3px;
   <a href="#"><img src="14 ontspannen.png" alt="Ontspannen"></a>
   <a href="#"><img src="15 medicamentels.png" alt="Medicamentels"></a>
 </div>
+
+ 
+<div class="psoriasis-balk">
+  <img src="psoriasis-verzorging.png" alt="Mijn psoriasisverzorging">
+
+  <div class="psoriasis-inhoud">
+    <strong>Mijn Psoriasisverzorging</strong>
+
+    <div class="psoriasis-status">
+      <img id="psoriasis-status-icoon"
+           src="psoriasis-rustig.png"
+           alt="Verzorgingsstatus">
+      <span id="psoriasis-status-tekst">Rustig</span>
+    </div>
+
+    <button id="psoriasis-status-knop" type="button">
+      Status aanpassen
+    </button>
+  </div>
+</div>
+
 
 <div class="blauwe-rust-afbeelding" style="display:none;">
   <img src="blauwe-rust.png" alt="Rustgevend water met blauwe bladeren">
@@ -1522,6 +1612,52 @@ document.getElementById("rosebud-bewaard-kopieer")
       alert("Kopiëren is niet gelukt.");
     }
 });
+
+ 
+/* Psoriasisverzorging – status bewaren */
+const psoriasisStatussen = [
+  {
+    naam: "Rustig",
+    afbeelding: "psoriasis-rustig.png"
+  },
+  {
+    naam: "Onrustig",
+    afbeelding: "psoriasis-onrustig.png"
+  },
+  {
+    naam: "Ernstig",
+    afbeelding: "psoriasis-ernstig.png"
+  }
+];
+
+let psoriasisStatus = Number(
+  localStorage.getItem("psoriasis-status") ?? 0
+);
+
+if (![0, 1, 2].includes(psoriasisStatus)) {
+  psoriasisStatus = 0;
+}
+
+function toonPsoriasisStatus() {
+  const status = psoriasisStatussen[psoriasisStatus];
+
+  document.getElementById("psoriasis-status-icoon").src =
+    status.afbeelding;
+
+  document.getElementById("psoriasis-status-tekst").textContent =
+    status.naam;
+}
+
+document.getElementById("psoriasis-status-knop")
+  .addEventListener("click", function () {
+    psoriasisStatus = (psoriasisStatus + 1) % 3;
+
+    localStorage.setItem("psoriasis-status", psoriasisStatus);
+    toonPsoriasisStatus();
+  });
+
+toonPsoriasisStatus();
+
  
  
 </script>
