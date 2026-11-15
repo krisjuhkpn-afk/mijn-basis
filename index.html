@@ -618,17 +618,17 @@ border-radius: 3px;
 .psoriasis-balk {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin: 18px 0;
-  padding: 12px;
+  padding: 6px;
   background: #FEC1D6;
   border: 1px solid #FC89A9;
   border-radius: 16px;
 }
 
 .psoriasis-balk > img {
-  width: 95px;
-  height: 95px;
+  width: 115px;
+  height: 115px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -639,6 +639,7 @@ border-radius: 3px;
   align-items: flex-start;
   gap: 8px;
   min-width: 0;
+ flex: 1;
   color: #B20231;
   font-size: 14px;
 }
@@ -647,11 +648,12 @@ border-radius: 3px;
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 18px;
 }
 
 .psoriasis-status img {
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   object-fit: contain;
 }
 
@@ -660,10 +662,12 @@ border-radius: 3px;
   color: #B20231;
   border: 1px solid #FC89A9;
   border-radius: 10px;
-  padding: 7px 10px;
+  padding: 5px 8px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
+ flex-shrink: 0;
+max-width: 85px;
 }
 
 /* Blauwe dag */
@@ -733,6 +737,7 @@ body.blauwe-dag-actief #psoriasis-status-knop {
 </div>
 
  
+
 <div class="psoriasis-balk">
   <img src="psoriasis-verzorging.png" alt="Mijn psoriasisverzorging">
 
@@ -745,11 +750,11 @@ body.blauwe-dag-actief #psoriasis-status-knop {
            alt="Verzorgingsstatus">
       <span id="psoriasis-status-tekst">Rustig</span>
     </div>
-
-    <button id="psoriasis-status-knop" type="button">
-      Status aanpassen
-    </button>
   </div>
+
+  <button id="psoriasis-status-knop" type="button">
+    Status aanpassen
+  </button>
 </div>
 
 
