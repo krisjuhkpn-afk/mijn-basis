@@ -630,13 +630,13 @@ border-radius: 3px;
   display: flex;
   align-items: center;
   width: 100%;
-  height: 55px;
+  height: 85px;
   margin: 22px 0;
   padding: 0 8px;
   box-sizing: border-box;
-  border: 1px solid #FC89A9;
+  border: none;
   border-radius: 35px;
-  background: #FEC1D6;
+  background: transparent;
   overflow: visible;
 }
 
@@ -646,9 +646,10 @@ border-radius: 3px;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover;
   border-radius: 35px;
   pointer-events: none;
+ clip-path: inset(0 round 35px);
 }
 
 /* Stapstenen met blaadje */
@@ -1687,6 +1688,8 @@ if (![0, 1, 2].includes(psoriasisStatus)) {
 
 function toonPsoriasisStatus() {
   const status = psoriasisStatussen[psoriasisStatus];
+ document.getElementById("psoriasis-gebieden").style.visibility =
+  psoriasisStatus === 0 ? "hidden" : "visible";
  document.getElementById("psoriasis-water").src =
   ["psoriasis-water-rustig.png",
    "psoriasis-water-onrustig.png",
