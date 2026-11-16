@@ -1688,9 +1688,7 @@ if (![0, 1, 2].includes(psoriasisStatus)) {
 
 function toonPsoriasisStatus() {
   const status = psoriasisStatussen[psoriasisStatus];
- document.getElementById("psoriasis-gebieden").style.visibility =
-  psoriasisStatus === 0 ? "hidden" : "visible";
- document.getElementById("psoriasis-water").src =
+  document.getElementById("psoriasis-water").src =
   ["psoriasis-water-rustig.png",
    "psoriasis-water-onrustig.png",
    "psoriasis-water-ernstig.png"][psoriasisStatus];
