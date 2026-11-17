@@ -627,7 +627,7 @@ border-radius: 3px;
 .psoriasis-rij {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
   width: 100%;
  box-sizing: border-box;
 }
@@ -705,13 +705,16 @@ border-radius: 3px;
 
 /* Ronde potloodknop */
 #psoriasis-status-knop {
-  position: relative;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2;
   width: 48px;
   height: 48px;
   min-width: 48px;
   padding: 0;
-  margin-left: 4px;
+  margin: 0;
   border: none;
   border-radius: 50%;
   background: transparent;
