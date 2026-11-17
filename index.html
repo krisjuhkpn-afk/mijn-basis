@@ -828,6 +828,26 @@ body.blauwe-dag-actief .psoriasis-balk {
 .psoriasis-paneel label:has(input:checked) input {
   accent-color: #A0A0A0;
 }
+
+ /* Lichtroze vakjes met witte vinkjes */
+.psoriasis-paneel input[type="checkbox"]:checked {
+  appearance: none;
+  background: #D8B9C5;
+  border: 1px solid #D8B9C5;
+  border-radius: 3px;
+  position: relative;
+}
+
+.psoriasis-paneel input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 15px;
+}
  
 </style>
 </head>
