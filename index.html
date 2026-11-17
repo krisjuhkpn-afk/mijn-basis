@@ -742,7 +742,54 @@ body.blauwe-dag-actief .psoriasis-balk {
   background: #DBEEFC;
   border-color: #4FA1E0;
 }
+/* Uitklapbare psoriasisverzorging */
+.psoriasis-paneel {
+  margin: 8px 12px 24px;
+  padding: 16px;
+  background: #FFF4F8;
+  border: 1px solid #ECA0BC;
+  border-radius: 22px;
+  font-family: 'Nunito', sans-serif;
+}
 
+.psoriasis-paneel[hidden] {
+  display: none;
+}
+
+.psoriasis-paneel h3 {
+  margin: 0 0 12px;
+  color: #B20231;
+  font-size: 18px;
+}
+
+.psoriasis-paneel p {
+  color: #B20231;
+  background: #FAD8E5;
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-weight: 700;
+}
+
+.psoriasis-paneel label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #F2CDDA;
+  font-size: 14px;
+  color: #333;
+}
+
+.psoriasis-paneel label:last-child {
+  border-bottom: none;
+}
+
+.psoriasis-paneel input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  accent-color: #D9789A;
+}
 
  
 </style>
@@ -829,6 +876,27 @@ body.blauwe-dag-actief .psoriasis-balk {
 </div>
  </div> <!-- Einde psoriasis-rij -->
 
+ <!-- Uitklapbaar paneel handverzorging -->
+<section id="psoriasis-paneel-handen" class="psoriasis-paneel" hidden>
+  <h3>Mijn handverzorging</h3>
+  <p>Verzorging bij status Ernstig</p>
+
+  <label><input type="checkbox">
+    Ochtend – Dermovate zalf + handschoentjes (± 1 uur)
+  </label>
+
+  <label><input type="checkbox">
+    Daarna – Verzorgende handcrème (Eucerin)
+  </label>
+
+  <label><input type="checkbox">
+    Extra – Bij droge of gevoelige huid tussendoor insmeren
+  </label>
+
+  <label><input type="checkbox">
+    Avond – Verzorgende handcrème
+  </label>
+</section>
 
 
 <div class="blauwe-rust-afbeelding" style="display:none;">
@@ -1743,15 +1811,15 @@ document.getElementById("psoriasis-status-knop")
 }
 
  function openPsoriasis(gebied) {
-  const namen = {
-    handen: "Mijn handverzorging",
-    hoofd: "Mijn hoofdhuidverzorging",
-    oren: "Mijn oorverzorging"
-  };
+  const paneel = document.getElementById(
+    "psoriasis-paneel-" + gebied
+  );
 
-  alert(namen[gebied]);
+  if (!paneel) return;
+
+  paneel.hidden = !paneel.hidden;
 }
-
+ 
 document.getElementById("psoriasis-status-knop")
   .addEventListener("click", function () {
     psoriasisStatus = (psoriasisStatus + 1) % 3;
