@@ -823,9 +823,9 @@ body.blauwe-dag-actief .psoriasis-balk {
 </div>
 
  <div id="psoriasis-gebieden">
-  <img src="psoriasis-hand.png" alt="Handen">
-  <img src="psoriasis-hoofdhuid.png" alt="Hoofd">
-  <img src="psoriasis-oor.png" alt="Oren">
+  <img src="psoriasis-hand.png" alt="Handen" role="button" tabindex="0" onclick="openPsoriasis('handen')">
+  <img src="psoriasis-hoofdhuid.png" alt="Hoofd" role="button" tabindex="0" onclick="openPsoriasis('hoofd')">
+  <img src="psoriasis-oor.png" alt="Oren" role="button" tabindex="0" onclick="openPsoriasis('oren')">
 </div>
  </div> <!-- Einde psoriasis-rij -->
 
@@ -1740,6 +1740,16 @@ document.getElementById("psoriasis-status-knop")
     "--potlood-afbeelding",
     'url("' + potloodKleuren[psoriasisStatus] + '")'
   );
+}
+
+ function openPsoriasis(gebied) {
+  const namen = {
+    handen: "Mijn handverzorging",
+    hoofd: "Mijn hoofdhuidverzorging",
+    oren: "Mijn oorverzorging"
+  };
+
+  alert(namen[gebied]);
 }
 
 document.getElementById("psoriasis-status-knop")
