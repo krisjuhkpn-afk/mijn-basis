@@ -623,13 +623,26 @@ border-radius: 3px;
  
 /* Mijn Psoriasisverzorging */
 
-/* Mijn Psoriasisverzorging - nieuwe balk */
+ /* Psoriasisbalk en iconen naast elkaar */
+.psoriasis-rij {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.psoriasis-rij .psoriasis-balk {
+  flex: 1;
+  min-width: 0;
+  margin: 10px 0 22px;
+}
  
+/* Mijn Psoriasisverzorging - nieuwe balk */
 .psoriasis-balk {
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: auto;
   height: 85px;
   margin: 10px 0 22px;
   padding: 0 8px;
@@ -675,14 +688,18 @@ border-radius: 3px;
 
 /* Handen, hoofd en oor */
 #psoriasis-gebieden {
-  position: relative;
-  z-index: 1;
-  width: 100px;
-  height: 48px;
-  object-fit: contain;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-left: auto;
-  flex-shrink: 1;
-  min-width: 0;
+  flex-shrink: 0;
+}
+
+#psoriasis-gebieden img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  cursor: pointer;
 }
 
 /* Ronde potloodknop */
@@ -768,7 +785,7 @@ body.blauwe-dag-actief .psoriasis-balk {
  
 <h2 class="psoriasis-titel">Mijn Psoriasisverzorging</h2>
  
-
+<div class="psoriasis-rij">
 <div class="psoriasis-balk">
 
   <img
@@ -785,12 +802,6 @@ body.blauwe-dag-actief .psoriasis-balk {
 
   <span id="psoriasis-status-tekst">Rustig</span>
 
-  <img
-    id="psoriasis-gebieden"
-    src="psoriasis-gebieden.png"
-    alt="Handen, hoofd en oren"
-  >
-
   <button
     id="psoriasis-status-knop"
     type="button"
@@ -798,6 +809,13 @@ body.blauwe-dag-actief .psoriasis-balk {
   </button>
 
 </div>
+
+ <div id="psoriasis-gebieden">
+  <img src="psoriasis-hand.png" alt="Handen">
+  <img src="psoriasis-hoofdhuid.png" alt="Hoofd">
+  <img src="psoriasis-oor.png" alt="Oren">
+</div>
+ </div> <!-- Einde psoriasis-rij -->
 
 
 
