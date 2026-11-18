@@ -9,7 +9,7 @@
   "services": [
     {
       "binding": "AGENDA_SERVICE",
-      "service": "krisjuh-agenda-test"
+      "service": "vandagen-google-productie"
     }
   ]
 }
