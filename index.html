@@ -1887,6 +1887,26 @@ document.getElementById("psoriasis-status-knop")
 toonPsoriasisStatus();
 
  
+/* Psoriasisverzorging: vinkjes per dag bewaren */
+const psoriasisVandaag = new Date().toLocaleDateString("sv-SE");
+const psoriasisVinkjes = document.querySelectorAll(
+  '.psoriasis-paneel input[type="checkbox"]'
+);
+
+psoriasisVinkjes.forEach((vakje, nummer) => {
+  const sleutel = "psoriasis-vinkje-" + psoriasisVandaag + "-" + nummer;
+
+  vakje.checked = localStorage.getItem(sleutel) === "true";
+
+  vakje.addEventListener("change", () => {
+    if (vakje.checked) {
+      localStorage.setItem(sleutel, "true");
+    } else {
+      localStorage.removeItem(sleutel);
+    }
+  });
+});
+ 
  
 </script>
 
