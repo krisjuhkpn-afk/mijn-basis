@@ -638,11 +638,28 @@ border-radius: 3px;
   min-width: 0;
   margin: 10px 0 22px;
 }
+
+ /* Handen en waterbalk naast elkaar */
+.psoriasis-onderdeel {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+}
+
+.psoriasis-gebied-icoon {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  flex-shrink: 0;
+  cursor: pointer;
+}
  
 /* Mijn Psoriasisverzorging - nieuwe balk */
 .psoriasis-balk {
   position: relative;
   display: flex;
+  flex: 1;
   align-items: center;
   width: auto;
   height: 85px;
@@ -665,6 +682,13 @@ border-radius: 3px;
   border-radius: 35px;
   pointer-events: none;
  clip-path: inset(0 round 35px);
+}
+ 
+ /* Stapstenen gedeeltelijk over de waterbalk */
+.psoriasis-onderdeel #psoriasis-status-icoon {
+  position: relative;
+  z-index: 3;
+  margin-right: -25px;
 }
 
 /* Stapstenen met blaadje */
@@ -902,18 +926,29 @@ body.blauwe-dag-actief .psoriasis-balk {
 <h2 class="psoriasis-titel">Mijn Psoriasisverzorging</h2>
  
 <div class="psoriasis-rij">
+ 
+ <!-- Psoriasisverzorging handen -->
+<div class="psoriasis-onderdeel psoriasis-handen">
+  <img
+  src="psoriasis-hand.png"
+  alt="Handverzorging openen"
+  class="psoriasis-gebied-icoon"
+  role="button"
+  tabindex="0"
+  onclick="openPsoriasis('handen')"
+>
+  <img
+    id="psoriasis-status-icoon"
+    src="psoriasis-rustig.png"
+    alt="Verzorgingsstatus"
+  >
+ 
 <div class="psoriasis-balk">
 
   <img
     id="psoriasis-water"
     src="psoriasis-water-rustig.png"
     alt=""
-  >
-
-  <img
-    id="psoriasis-status-icoon"
-    src="psoriasis-rustig.png"
-    alt="Verzorgingsstatus"
   >
 
   <span id="psoriasis-status-tekst">Rustig</span>
@@ -927,10 +962,10 @@ body.blauwe-dag-actief .psoriasis-balk {
 </div>
 
  <div id="psoriasis-gebieden">
-  <img src="psoriasis-hand.png" alt="Handen" role="button" tabindex="0" onclick="openPsoriasis('handen')">
   <img src="psoriasis-hoofdhuid.png" alt="Hoofd" role="button" tabindex="0" onclick="openPsoriasis('hoofd')">
   <img src="psoriasis-oor.png" alt="Oren" role="button" tabindex="0" onclick="openPsoriasis('oren')">
 </div>
+ </div> <!-- Einde psoriasis-onderdeel handen -->
  </div> <!-- Einde psoriasis-rij -->
 
  <!-- Uitklapbaar paneel handverzorging -->
