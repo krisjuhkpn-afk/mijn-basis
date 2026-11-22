@@ -638,7 +638,7 @@ border-radius: 3px;
 .psoriasis-rij .psoriasis-balk {
   flex: 1;
   min-width: 0;
-  margin: 0;
+  margin: 0 45px 0 0;
 }
 
  /* Handen en waterbalk naast elkaar */
@@ -703,8 +703,8 @@ border-radius: 3px;
 #psoriasis-status-icoon-hoofd {
   position: relative;
   z-index: 1;
-  width: 65px;
-  height: 65px;
+  width: 55px;
+  height: 55px;
   object-fit: contain;
   flex-shrink: 0;
   margin-left: 0;
@@ -715,7 +715,7 @@ border-radius: 3px;
 #psoriasis-status-tekst-hoofd {
   position: absolute;
   left: auto;
-  right: 8px;
+  right: 35px;
   top: 100%;
   z-index: 3;
   font-family: 'Nunito', sans-serif;
@@ -726,6 +726,15 @@ border-radius: 3px;
   margin: -18px 0 0;
   transform: none;
   text-shadow: none;
+}
+
+ #psoriasis-status-tekst::after,
+#psoriasis-status-tekst-hoofd::after {
+  content: "♡";
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 17px;
+  color: #D9789A;
 }
 
 /* Handen, hoofd en oor */
@@ -749,8 +758,8 @@ border-radius: 3px;
 #psoriasis-status-knop,
 #psoriasis-status-knop-hoofd {
   position: absolute;
-  right: 8px;
-  top: 55%;
+  right: -30px;
+  top: 70%;
   transform: translateY(-50%);
   z-index: 2;
   width: 48px;
