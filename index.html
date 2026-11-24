@@ -623,54 +623,102 @@ border-radius: 3px;
  
 /* Mijn Psoriasisverzorging */
 
- /* Psoriasisbalk en iconen naast elkaar */
 .psoriasis-rij {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   width: 100%;
- padding-right: 15px;
- box-sizing: border-box;
- margin-top: 0px;
+  box-sizing: border-box;
+  margin: 0;
 }
 
-.psoriasis-rij .psoriasis-balk {
-  flex: 1;
-  min-width: 0;
-  margin: 0 45px 0 0;
-}
-
- /* Handen en waterbalk naast elkaar */
+/* Indeling van beide balken */
 .psoriasis-onderdeel {
   display: flex;
   align-items: center;
   width: 100%;
   min-width: 0;
-  gap: 0; 
+  gap: 0;
   box-sizing: border-box;
 }
 
-.psoriasis-gebied-icoon {
+/* Stapstenen en statustekst links */
+.psoriasis-status-groep {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  width: 65px;
+  z-index: 3;
+  margin-right: -15px;
+}
+
+/* Stapstenen als aanklikbare statusknop */
+#psoriasis-status-knop,
+#psoriasis-status-knop-hoofd {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Geen potloodjes meer */
+#psoriasis-status-knop::before,
+#psoriasis-status-knop-hoofd::before {
+  display: none;
+  content: none;
+}
+
+/* Afbeeldingen stapstenen */
+#psoriasis-status-icoon,
+#psoriasis-status-icoon-hoofd {
   width: 55px;
   height: 55px;
   object-fit: contain;
-  flex-shrink: 0;
-  cursor: pointer;
 }
- 
-/* Mijn Psoriasisverzorging - nieuwe balk */
+
+/* Statustekst onder de stapstenen */
+#psoriasis-status-tekst,
+#psoriasis-status-tekst-hoofd {
+  position: relative;
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #D9789A;
+  white-space: nowrap;
+  margin: 0;
+  text-shadow: none;
+}
+
+/* Hartje naast de status */
+#psoriasis-status-tekst::after,
+#psoriasis-status-tekst-hoofd::after {
+  content: "♡";
+  display: inline-block;
+  margin-left: 3px;
+  font-size: 14px;
+  color: #D9789A;
+}
+
+/* Waterbalk */
 .psoriasis-balk {
   position: relative;
   display: flex;
   flex: 1;
   align-items: center;
-  width: 100%;
   min-width: 0;
-  height: 85px;
+  height: 65px;
   margin: 0;
-  padding: 0 8px;
-  box-sizing: border-box;
+  padding: 0;
   border: none;
   border-radius: 35px;
   background: transparent;
@@ -678,8 +726,8 @@ border-radius: 3px;
 }
 
 /* Waterachtergrond */
-  #psoriasis-water,
-  .psoriasis-water {
+#psoriasis-water,
+.psoriasis-water {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -687,99 +735,17 @@ border-radius: 3px;
   object-fit: cover;
   border-radius: 35px;
   pointer-events: none;
- clip-path: inset(0 round 35px);
-}
- 
- /* Stapstenen gedeeltelijk over de waterbalk */
-.psoriasis-onderdeel #psoriasis-status-icoon,
-.psoriasis-onderdeel #psoriasis-status-icoon-hoofd {
-  position: relative;
-  z-index: 3;
-  margin-right: -25px;
+  clip-path: inset(0 round 35px);
 }
 
-/* Stapstenen met blaadje */
-#psoriasis-status-icoon,
-#psoriasis-status-icoon-hoofd {
-  position: relative;
-  z-index: 1;
+/* Handen en hoofd rechts */
+.psoriasis-gebied-icoon {
   width: 55px;
   height: 55px;
   object-fit: contain;
   flex-shrink: 0;
-  margin-left: 0;
-}
-
-/* Statustekst */
-#psoriasis-status-tekst,
-#psoriasis-status-tekst-hoofd {
-  position: absolute;
-  left: auto;
-  right: 35px;
-  top: 100%;
-  z-index: 3;
-  font-family: 'Nunito', sans-serif;
-  font-size: 12px;
-  font-weight: 900;
-  color: #D9789A;
-  white-space: nowrap;
-  margin: -18px 0 0;
-  transform: none;
-  text-shadow: none;
-}
-
- #psoriasis-status-tekst::after,
-#psoriasis-status-tekst-hoofd::after {
-  content: "♡";
-  display: inline-block;
-  margin-left: 4px;
-  font-size: 17px;
-  color: #D9789A;
-}
-
-/* Handen, hoofd en oor */
-#psoriasis-gebieden {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-  flex-shrink: 0;
- transform: translateY(-3px);
-}
-
-#psoriasis-gebieden img {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
   cursor: pointer;
-}
-
-/* Ronde potloodknop */
-#psoriasis-status-knop,
-#psoriasis-status-knop-hoofd {
-  position: absolute;
-  right: -30px;
-  top: 70%;
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
-}
-
-#psoriasis-status-knop::before,
-#psoriasis-status-knop-hoofd::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--potlood-afbeelding, url("psoriasis-potlood-groen.png")) center / contain no-repeat;
+  margin-left: 5px;
 }
 
 /* Blauwe dag */
@@ -787,6 +753,7 @@ body.blauwe-dag-actief .psoriasis-balk {
   background: #DBEEFC;
   border-color: #4FA1E0;
 }
+ 
 /* Uitklapbare psoriasisverzorging */
 .psoriasis-paneel {
   margin: 8px 12px 24px;
@@ -945,82 +912,79 @@ body.blauwe-dag-actief .psoriasis-balk {
 
  
 <h2 class="psoriasis-titel">Mijn Psoriasisverzorging</h2>
- 
+
 <div class="psoriasis-rij">
- 
- <!-- Psoriasisverzorging handen -->
-<div class="psoriasis-onderdeel psoriasis-handen">
-  <img
-  src="psoriasis-hand.png"
-  alt="Handverzorging openen"
-  class="psoriasis-gebied-icoon"
-  role="button"
-  tabindex="0"
-  onclick="openPsoriasis('handen')"
->
-  <img
-    id="psoriasis-status-icoon"
-    src="psoriasis-rustig.png"
-    alt="Verzorgingsstatus"
-  >
- 
-<div class="psoriasis-balk">
 
-  <img
-    id="psoriasis-water"
-    src="psoriasis-balk.png"
-    alt=""
-  >
+  <!-- Psoriasisverzorging handen -->
+  <div class="psoriasis-onderdeel psoriasis-handen">
 
-  <span id="psoriasis-status-tekst">Rustig</span>
+    <div class="psoriasis-status-groep">
+      <button
+        id="psoriasis-status-knop"
+        type="button"
+        aria-label="Status handen aanpassen">
+        <img
+          id="psoriasis-status-icoon"
+          src="psoriasis-rustig.png"
+          alt="Verzorgingsstatus">
+      </button>
 
-  <button
-    id="psoriasis-status-knop"
-    type="button"
-    aria-label="Status aanpassen">
-  </button>
+      <span id="psoriasis-status-tekst">Rustig</span>
+    </div>
 
-</div>
+    <div class="psoriasis-balk">
+      <img
+        id="psoriasis-water"
+        src="psoriasis-balk.png"
+        alt="">
+    </div>
 
- </div> <!-- Einde psoriasis-onderdeel handen -->
-
- <!-- Psoriasisverzorging hoofdhuid -->
-<div class="psoriasis-onderdeel psoriasis-hoofdhuid">
-
-  <img
-    src="psoriasis-hoofdhuid.png"
-    alt="Hoofdhuidverzorging openen"
-    class="psoriasis-gebied-icoon"
-    role="button"
-    tabindex="0"
-    onclick="openPsoriasis('hoofd')"
-  >
-
-  <img
-    id="psoriasis-status-icoon-hoofd"
-    src="psoriasis-rustig.png"
-    alt="Status hoofdhuid"
-  >
-
-  <div class="psoriasis-balk">
     <img
-      class="psoriasis-water"
-      src="psoriasis-balk.png"
-      alt=""
-    >
+      src="psoriasis-hand.png"
+      alt="Handverzorging openen"
+      class="psoriasis-gebied-icoon"
+      role="button"
+      tabindex="0"
+      onclick="openPsoriasis('handen')">
 
-    <span id="psoriasis-status-tekst-hoofd">Rustig</span>
-
-    <button
-      id="psoriasis-status-knop-hoofd"
-      type="button"
-      aria-label="Status hoofdhuid aanpassen">
-    </button>
   </div>
 
-</div> <!-- Einde psoriasis-onderdeel hoofdhuid -->
- 
- </div> <!-- Einde psoriasis-rij -->
+  <!-- Psoriasisverzorging hoofdhuid -->
+  <div class="psoriasis-onderdeel psoriasis-hoofdhuid">
+
+    <div class="psoriasis-status-groep">
+      <button
+        id="psoriasis-status-knop-hoofd"
+        type="button"
+        aria-label="Status hoofdhuid aanpassen">
+        <img
+          id="psoriasis-status-icoon-hoofd"
+          src="psoriasis-rustig.png"
+          alt="Status hoofdhuid">
+      </button>
+
+      <span id="psoriasis-status-tekst-hoofd">Rustig</span>
+    </div>
+
+    <div class="psoriasis-balk">
+      <img
+        class="psoriasis-water"
+        src="psoriasis-balk.png"
+        alt="">
+    </div>
+
+    <img
+      src="psoriasis-hoofdhuid.png"
+      alt="Hoofdhuidverzorging openen"
+      class="psoriasis-gebied-icoon"
+      role="button"
+      tabindex="0"
+      onclick="openPsoriasis('hoofd')">
+
+  </div>
+
+</div>
+<!-- Einde psoriasis-rij -->
 
  <!-- Uitklapbaar paneel handverzorging -->
 <section id="psoriasis-paneel-handen" class="psoriasis-paneel" hidden>
@@ -1946,30 +1910,16 @@ if (![0, 1, 2].includes(psoriasisStatusHoofd)) {
 }
 
 function toonPsoriasisStatus() {
-    const status = psoriasisStatussen[psoriasisStatusHanden];
-
+  const status = psoriasisStatussen[psoriasisStatusHanden];
 
   document.getElementById("psoriasis-status-icoon").src =
     status.afbeelding;
 
   document.getElementById("psoriasis-status-tekst").textContent =
     status.naam;
-
-const potloodKleuren = [
-  "psoriasis-potlood-groen.png",
-  "psoriasis-potlood-geel.png",
-  "psoriasis-potlood-oranje.png",
-  "psoriasis-potlood-rood.png"
-];
-
-document.getElementById("psoriasis-status-knop")
-  .style.setProperty(
-    "--potlood-afbeelding",
-    'url("' + potloodKleuren[psoriasisStatusHanden] + '")'
-  );
 }
- 
- function toonPsoriasisStatusHoofd() {
+
+function toonPsoriasisStatusHoofd() {
   const status = psoriasisStatussen[psoriasisStatusHoofd];
 
   document.getElementById("psoriasis-status-icoon-hoofd").src =
@@ -1977,17 +1927,6 @@ document.getElementById("psoriasis-status-knop")
 
   document.getElementById("psoriasis-status-tekst-hoofd").textContent =
     status.naam;
-
-  const potloodKleurenHoofd = [
-  "psoriasis-potlood-groen.png",
-  "psoriasis-potlood-geel.png",
-  "psoriasis-potlood-oranje.png"
-];
-
-document.getElementById("psoriasis-status-knop-hoofd").style.setProperty(
-  "--potlood-afbeelding",
-  'url("' + potloodKleurenHoofd[psoriasisStatusHoofd] + '")'
-);
 }
 
  function openPsoriasis(gebied) {
