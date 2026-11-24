@@ -739,6 +739,12 @@ border-radius: 3px;
 .psoriasis-rij {
   margin-bottom: 38px;
 }
+ /* Tekst informatiebalken handverzorging */
+#psoriasis-verzorging-advies p {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+}
  
 /* Uitklapbare psoriasisverzorging */
 .psoriasis-paneel {
@@ -1899,21 +1905,21 @@ if (![0, 1, 2].includes(psoriasisStatusHoofd)) {
       dermovate: "weekend",
       overdag: "Overdag: basiscrème met 10% vaseline",
       avond: "Avond: zo nodig basiscrème met 10% vaseline",
-      advies: "Naar fase 4 wanneer de huid 4 weken volledig rustig blijft zonder terugval."
+      advies: "Naar fase 1 wanneer de huid 4 weken volledig rustig blijft zonder terugval."
     },
 
     "Ernstig": {
       dermovate: "om-de-dag",
       overdag: "Overdag: cetomacrogolcrème met 10% vaseline",
       avond: "Avond: cetomacrogolcrème met 20% vaseline en katoenen handschoenen",
-      advies: "Naar fase 3 wanneer de huid 2 weken stabiel blijft, gladder wordt en geen nieuwe barstjes krijgt."
+      advies: "Naar fase 2 wanneer de huid 2 weken stabiel blijft, gladder wordt en geen nieuwe barstjes krijgt."
     },
 
     "Zeer ernstig": {
       dermovate: "dagelijks",
       overdag: "Overdag: cetomacrogolcrème met 10% vaseline",
       avond: "Avond: cetomacrogolcrème met 20% vaseline en katoenen handschoenen",
-      advies: "Naar fase 2 wanneer de open kloven dicht zijn, de pijn weg is en de felle roodheid duidelijk is afgenomen (meestal na 1 tot 3 weken)."
+      advies: "Naar fase 3 wanneer de open kloven dicht zijn, de pijn weg is en de felle roodheid duidelijk is afgenomen (meestal na 1 tot 3 weken)."
     }
   };
 
@@ -1968,9 +1974,10 @@ function toonHandverzorging() {
   }
 
   if (schema.dermovate === "om-de-dag" && laatste) {
-    dermovateDag =
-      laatste !== psoriasisDatum(gisteren);
-  }
+  dermovateDag =
+    Boolean(historie[vandaag]) ||
+    laatste < psoriasisDatum(gisteren);
+}
 
   const lijst = document.getElementById(
     "psoriasis-verzorging-handen"
@@ -1982,7 +1989,13 @@ function toonHandverzorging() {
 
   document.getElementById(
     "psoriasis-verzorging-titel"
-  ).textContent = "Handverzorging – " + status;
+  ).textContent = "Handverzorging – " + status +
+  " (fase " + ({
+    "Rustig": 1,
+    "Onrustig": 2,
+    "Ernstig": 3,
+    "Zeer ernstig": 4
+  }[status]) + ")";
 
   lijst.innerHTML = "";
   advies.innerHTML = "";
@@ -2012,6 +2025,8 @@ function toonHandverzorging() {
           historieSleutel,
           JSON.stringify(historie)
         );
+
+       toonHandverzorging();
       }
     });
 
@@ -2020,10 +2035,12 @@ function toonHandverzorging() {
     lijst.appendChild(label);
   }
 
-  if (dermovateDag || historie[vandaag]) {
+  if (dermovateDag) {
     voegStapToe(
       "dermovate",
-      "Ochtend: Dermovate + katoenen handschoenen, 30 minuten"
+      "Ochtend: Dermovate + katoenen handschoenen, 30 minuten" +
+  (status === "Onrustig" ? " (alleen in het weekend)" :
+   status === "Ernstig" ? " (om de dag)" : "")
     );
   }
 
@@ -2046,7 +2063,7 @@ function toonHandverzorging() {
     voegStapToe("avond-" + status, schema.avond);
   }
 
-  if (dermovateDag || historie[vandaag]) {
+  if (dermovateDag) {
     const tussenpoos = document.createElement("p");
     tussenpoos.textContent =
       "Tussenpoos: 30 tot 60 minuten tussen Dermovate en de vette basiszalf.";
@@ -2066,6 +2083,20 @@ function toonHandverzorging() {
   datumVeld.style.marginLeft = "8px";
   datumVeld.style.fontFamily = "inherit";
   datumVeld.style.color = "inherit";
+ datumVeld.style.width = "125px";
+datumVeld.style.minWidth = "125px";
+datumVeld.style.fontSize = "11px";
+datumVeld.style.fontWeight = "400";
+datumVeld.style.background = "transparent";
+datumVeld.style.border = "none";
+datumVeld.style.padding = "2px";
+datumVeld.style.display = "inline-block";
+
+datumLabel.style.fontSize = "11px";
+datumLabel.style.fontWeight = "400";
+datumLabel.style.display = "flex";
+datumLabel.style.alignItems = "center";
+datumLabel.style.flexWrap = "wrap";
 
   datumVeld.addEventListener("change", function () {
     if (!datumVeld.value || datumVeld.value > vandaag) {
