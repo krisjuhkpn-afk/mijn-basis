@@ -972,25 +972,16 @@ border-radius: 3px;
 </div>
 <!-- Einde psoriasis-rij -->
 
- <!-- Uitklapbaar paneel handverzorging -->
-<section id="psoriasis-paneel-handen" class="psoriasis-paneel" hidden>
-  <h2>Handverzorging ernstig</h2>
+<!-- Uitklapbaar paneel handverzorging -->
+<section id="psoriasis-paneel-handen"
+         class="psoriasis-paneel" hidden>
 
-  <label><input type="checkbox">
-    Ochtend: dermovate zalf + handschoentjes, 30 minuten
-  </label>
+  <h2 id="psoriasis-verzorging-titel"></h2>
 
-  <label><input type="checkbox">
-    Daarna: eucerin urearepair plus handcrème
-  </label>
+  <div id="psoriasis-verzorging-handen"></div>
 
-  <label><input type="checkbox">
-    Zo nodig: eucerin urearepair plus handchandcrème
-  </label>
+  <div id="psoriasis-verzorging-advies"></div>
 
-  <label><input type="checkbox">
-    Avond: eucerin urearepair plus handcrème
-  </label>
 </section>
 
 
@@ -1895,6 +1886,212 @@ if (![0, 1, 2].includes(psoriasisStatusHoofd)) {
   psoriasisStatusHoofd = 0;
 }
 
+ function handverzorgingSchema(status) {
+  const schemas = {
+    "Rustig": {
+      dermovate: "niet",
+      overdag: "Na het handen wassen: verzorgingshandcrème of basiscrème",
+      avond: "",
+      advies: "Bij beginnende terugval terugschakelen volgens het afgesproken behandelplan."
+    },
+
+    "Onrustig": {
+      dermovate: "weekend",
+      overdag: "Overdag: basiscrème met 10% vaseline",
+      avond: "Avond: zo nodig basiscrème met 10% vaseline",
+      advies: "De huid blijft 2 tot 4 weken volledig rustig zonder terugval."
+    },
+
+    "Ernstig": {
+      dermovate: "om-de-dag",
+      overdag: "Overdag: cetomacrogolcrème met 10% vaseline",
+      avond: "Avond: cetomacrogolcrème met 20% vaseline en katoenen handschoenen",
+      advies: "De huid blijft stabiel, wordt gladder en krijgt geen nieuwe barstjes (na 1 tot 2 weken)."
+    },
+
+    "Zeer ernstig": {
+      dermovate: "dagelijks",
+      overdag: "Overdag: cetomacrogolcrème met 10% vaseline",
+      avond: "Avond: cetomacrogolcrème met 20% vaseline en katoenen handschoenen",
+      advies: "De open kloven zijn dicht, de pijn is weg en de felle roodheid is duidelijk afgenomen (meestal na 1 tot 3 weken)."
+    }
+  };
+
+  return schemas[status];
+}
+
+ function psoriasisDatum(datum = new Date()) {
+  return [
+    datum.getFullYear(),
+    String(datum.getMonth() + 1).padStart(2, "0"),
+    String(datum.getDate()).padStart(2, "0")
+  ].join("-");
+}
+
+function toonHandverzorging() {
+  const status = psoriasisStatussen[psoriasisStatusHanden].naam;
+  const schema = handverzorgingSchema(status);
+
+  if (!schema) return;
+
+  const nu = new Date();
+  const vandaag = psoriasisDatum(nu);
+  const weekdag = nu.getDay();
+
+  const opslagSleutel = "handverzorging-" + vandaag;
+  const historieSleutel = "dermovate-handen-historie";
+
+  const afgevinkt = JSON.parse(
+    localStorage.getItem(opslagSleutel) || "{}"
+  );
+
+  const historie = JSON.parse(
+    localStorage.getItem(historieSleutel) || "{}"
+  );
+
+  const laatste = Object.keys(historie)
+    .filter(datum => historie[datum] && datum <= vandaag)
+    .sort()
+    .pop();
+
+  const gisteren = new Date(nu);
+  gisteren.setDate(gisteren.getDate() - 1);
+
+  let dermovateDag = false;
+
+  if (schema.dermovate === "dagelijks") {
+    dermovateDag = true;
+  }
+
+  if (schema.dermovate === "weekend") {
+    dermovateDag = weekdag === 0 || weekdag === 6;
+  }
+
+  if (schema.dermovate === "om-de-dag" && laatste) {
+    dermovateDag =
+      laatste !== psoriasisDatum(gisteren);
+  }
+
+  const lijst = document.getElementById(
+    "psoriasis-verzorging-handen"
+  );
+
+  const advies = document.getElementById(
+    "psoriasis-verzorging-advies"
+  );
+
+  document.getElementById(
+    "psoriasis-verzorging-titel"
+  ).textContent = "Handverzorging – " + status;
+
+  lijst.innerHTML = "";
+  advies.innerHTML = "";
+
+  function voegStapToe(sleutel, tekst) {
+    const label = document.createElement("label");
+    const vakje = document.createElement("input");
+
+    vakje.type = "checkbox";
+
+    vakje.checked = sleutel === "dermovate"
+      ? Boolean(historie[vandaag])
+      : Boolean(afgevinkt[sleutel]);
+
+    vakje.addEventListener("change", function () {
+      afgevinkt[sleutel] = vakje.checked;
+
+      localStorage.setItem(
+        opslagSleutel,
+        JSON.stringify(afgevinkt)
+      );
+
+      if (sleutel === "dermovate") {
+        historie[vandaag] = vakje.checked;
+
+        localStorage.setItem(
+          historieSleutel,
+          JSON.stringify(historie)
+        );
+      }
+    });
+
+    label.appendChild(vakje);
+    label.appendChild(document.createTextNode(tekst));
+    lijst.appendChild(label);
+  }
+
+  if (dermovateDag || historie[vandaag]) {
+    voegStapToe(
+      "dermovate",
+      "Ochtend: Dermovate + katoenen handschoenen, 30 minuten"
+    );
+  }
+
+  if (schema.dermovate === "om-de-dag" && !laatste) {
+    const melding = document.createElement("p");
+    melding.textContent =
+      "Leg eerst je laatste Dermovate-smeerdatum vast.";
+    lijst.appendChild(melding);
+  }
+
+  if (schema.overdag) {
+    voegStapToe("overdag-" + status, schema.overdag);
+  }
+
+  if (
+    schema.avond &&
+    (status !== "Ernstig" ||
+      (!dermovateDag && laatste && !historie[vandaag]))
+  ) {
+    voegStapToe("avond-" + status, schema.avond);
+  }
+
+  if (dermovateDag || historie[vandaag]) {
+    const tussenpoos = document.createElement("p");
+    tussenpoos.textContent =
+      "Tussenpoos: 30 tot 60 minuten tussen Dermovate en de vette basiszalf.";
+    advies.appendChild(tussenpoos);
+  }
+
+  const overgang = document.createElement("p");
+  overgang.textContent = schema.advies;
+  advies.appendChild(overgang);
+   const datumLabel = document.createElement("label");
+  datumLabel.textContent = "Laatste Dermovate-behandeling:";
+
+  const datumVeld = document.createElement("input");
+  datumVeld.type = "date";
+  datumVeld.max = vandaag;
+  datumVeld.value = laatste || "";
+  datumVeld.style.marginLeft = "8px";
+  datumVeld.style.fontFamily = "inherit";
+  datumVeld.style.color = "inherit";
+
+  datumVeld.addEventListener("change", function () {
+    if (!datumVeld.value || datumVeld.value > vandaag) {
+      return;
+    }
+
+    Object.keys(historie).forEach(function (datum) {
+      if (datum > datumVeld.value) {
+        delete historie[datum];
+      }
+    });
+
+    historie[datumVeld.value] = true;
+
+    localStorage.setItem(
+      historieSleutel,
+      JSON.stringify(historie)
+    );
+
+    toonHandverzorging();
+  });
+
+  datumLabel.appendChild(datumVeld);
+  advies.appendChild(datumLabel);
+}
+
 function toonPsoriasisStatus() {
   const status = psoriasisStatussen[psoriasisStatusHanden];
 
@@ -1903,6 +2100,8 @@ function toonPsoriasisStatus() {
 
   document.getElementById("psoriasis-status-tekst").textContent =
     status.naam;
+ 
+ toonHandverzorging();
 }
 
 function toonPsoriasisStatusHoofd() {
