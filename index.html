@@ -720,6 +720,25 @@ border-radius: 3px;
 .blauwe-dag-actief #psoriasis-status-tekst-hoofd {
   color: #024BAB;
 }
+
+ /* Verfijning psoriasisbalken */
+
+#psoriasis-status-knop,
+#psoriasis-status-knop-hoofd,
+#psoriasis-status-icoon,
+#psoriasis-status-icoon-hoofd {
+  width: 62px;
+  height: 62px;
+}
+
+#psoriasis-status-tekst,
+#psoriasis-status-tekst-hoofd {
+  top: calc(100% - 5px);
+}
+
+.psoriasis-rij {
+  margin-bottom: 38px;
+}
  
 /* Uitklapbare psoriasisverzorging */
 .psoriasis-paneel {
@@ -1852,7 +1871,7 @@ const psoriasisStatussen = [
   },
   {
     naam: "Zeer ernstig",
-    afbeelding: "psoriasis-zeer-ernstig.png"
+    afbeelding: "psoriasis-zeer ernstig.png"
   }
 ];
 
