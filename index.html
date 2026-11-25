@@ -2229,7 +2229,6 @@ verzorgingsadvies.textContent =
   "Gebruik uitsluitend pure aloë vera gel om het haar te verzorgen en in model te brengen.";
 
 adviesContainer.appendChild(verzorgingsadvies);
-}
 
  const overgangsadviezen = {
   "Rustig": "Bij beginnende terugval terugschakelen volgens het afgesproken behandelplan.",
@@ -2242,6 +2241,7 @@ const overgang = document.createElement("p");
 overgang.textContent = overgangsadviezen[status];
 
 adviesContainer.appendChild(overgang);
+   }
 
 function toonPsoriasisStatusHoofd() {
   const status = psoriasisStatussen[psoriasisStatusHoofd];
